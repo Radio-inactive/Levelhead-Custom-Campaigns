@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://map_arrow.png" type="Texture" id=1]
+[ext_resource path="res://MapArrow.gd" type="Script" id=2]
+
+[node name="MapArrow" type="Button"]
+anchor_right = 0.02
+anchor_bottom = 0.034
+margin_right = -0.400002
+margin_bottom = 0.279999
+rect_scale = Vector2( 2, 2 )
+action_mode = 0
+text = "                 "
+icon = ExtResource( 1 )
+flat = true
+icon_align = 2
+script = ExtResource( 2 )
+
+[connection signal="pressed" from="." to="." method="_on_MapArrow_pressed"]

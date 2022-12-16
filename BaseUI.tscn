@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MediumYanoneFont.tres" type="Theme" id=1]
+[ext_resource path="res://CC_logo_small.png" type="Texture" id=3]
+
+[node name="BaseUI" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1913.0
+margin_bottom = 1073.0
+
+[node name="Logo" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 750.0
+margin_bottom = 1066.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Logo"]
+margin_top = 295.0
+margin_right = 750.0
+margin_bottom = 688.0
+texture = ExtResource( 3 )
+
+[node name="Options" type="HBoxContainer" parent="HBoxContainer/Logo"]
+margin_top = 692.0
+margin_right = 750.0
+margin_bottom = 770.0
+theme = ExtResource( 1 )
+alignment = 1
+
+[node name="Settings" type="Button" parent="HBoxContainer/Logo/Options"]
+margin_left = 293.0
+margin_right = 456.0
+margin_bottom = 78.0
+text = "Settings"
+
+[node name="Menu" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 754.0
+margin_right = 1758.0
+margin_bottom = 1066.0
+
+[node name="Campaigns" type="HBoxContainer" parent="HBoxContainer/Menu"]
+margin_right = 1004.0
+margin_bottom = 1066.0
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+alignment = 1
+
+[node name="WorkshopContainer" type="VBoxContainer" parent="HBoxContainer/Menu/Campaigns"]
+margin_right = 500.0
+margin_bottom = 1066.0
+rect_min_size = Vector2( 500, 0 )
+
+[node name="Title" type="Label" parent="HBoxContainer/Menu/Campaigns/WorkshopContainer"]
+margin_right = 500.0
+margin_bottom = 72.0
+text = "Campaign Workshop"
+align = 1
+
+[node name="WorkshopCampaigns" type="PanelContainer" parent="HBoxContainer/Menu/Campaigns/WorkshopContainer"]
+margin_top = 76.0
+margin_right = 500.0
+margin_bottom = 984.0
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Menu/Campaigns/WorkshopContainer/WorkshopCampaigns"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 493.0
+margin_bottom = 901.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Content" type="VBoxContainer" parent="HBoxContainer/Menu/Campaigns/WorkshopContainer/WorkshopCampaigns/ScrollContainer"]
+margin_right = 486.0
+margin_bottom = 894.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddNew" type="Button" parent="HBoxContainer/Menu/Campaigns/WorkshopContainer"]
+margin_top = 988.0
+margin_right = 500.0
+margin_bottom = 1066.0
+text = "+"
+
+[node name="SavedLevelsContainer" type="VBoxContainer" parent="HBoxContainer/Menu/Campaigns"]
+margin_left = 504.0
+margin_right = 1004.0
+margin_bottom = 1066.0
+
+[node name="Title" type="Label" parent="HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
+margin_right = 500.0
+margin_bottom = 72.0
+text = "Saved Campaigns"
+align = 1
+
+[node name="SavedLevelsContainer" type="PanelContainer" parent="HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
+margin_top = 76.0
+margin_right = 500.0
+margin_bottom = 984.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 493.0
+margin_bottom = 901.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Content" type="VBoxContainer" parent="HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer"]
+margin_right = 486.0
+margin_bottom = 894.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddNew" type="Button" parent="HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
+margin_top = 988.0
+margin_right = 500.0
+margin_bottom = 1066.0
+text = "+"
