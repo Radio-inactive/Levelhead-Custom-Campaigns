@@ -12,6 +12,8 @@ func _ready():
 	var startPos = LevelOrbs.find_start_orb()
 	if startPos != null:
 		SpaceShip.position = startPos.position
+	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
+		JavaScript.eval("console.log('I am running on a browser!')")
 
 
 func _on_StartButton_pressed():
