@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LHWebMap.icon.png-d4ec2f40cae668664196c70fe9cd5acc.stex"
+path="res://.import/index.icon.png-5665fad188e88d1e882500a4376bfe02.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LHWebMap.icon.png"
-dest_files=[ "res://.import/LHWebMap.icon.png-d4ec2f40cae668664196c70fe9cd5acc.stex" ]
+source_file="res://index.icon.png"
+dest_files=[ "res://.import/index.icon.png-5665fad188e88d1e882500a4376bfe02.stex" ]
 
 [params]
 

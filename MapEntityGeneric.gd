@@ -1,8 +1,7 @@
+## Defines important enums used by map entities. Map entity nodes inherit from this
 extends Node2D
 
-###Map node variables
-
-#Node type
+# Important enums
 enum t_types {LEVEL = 0, ICON_PACK = 1, PATH_SHAPE_ASSIST = 2, PRESENTATION = 3}
 enum gr17_present {GR17_NOT_PRESENT = 0, GR17_PRESENT = 1}
 enum bug_pieces_present {BUG_PIECES_NOT_PRESENT = 0, BUG_PIECES_PRESENT = 1}
@@ -16,13 +15,3 @@ enum bm_biome {TREE_OF_MAARLA = 0, KISTOON_RUINS = 1, AQUADUNES = 2, ASTEROID_TU
 enum sc_hidden {VISIBLE_BEFORE_UNLOCKED = 0, HIDDEN_UNTIL_UNLOCKED = 1}
 enum scpre_hidden {PREVIOUS_PATHS_VISIBLE_BEFORE_UNLOCKED = 0, PREVIOUS_PATHS_HIDDEN_UNTIL_UNLOCKED = 1}
 enum scpost_hidden {FOLLOWING_PATHS_VISIBLE_BEFORE_UNLOCKED = 0, FOLLOWING_PATHS_HIDDEN_UNTIL_UNLOCKED = 1}
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

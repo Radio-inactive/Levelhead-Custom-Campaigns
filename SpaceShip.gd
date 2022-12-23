@@ -1,3 +1,4 @@
+## The Space ship moving around the Map
 extends Node2D
 
 onready var cam := $Camera2D
@@ -8,6 +9,7 @@ onready var DirectionArrows := $DirectionArrows
 
 signal update_ui(level)
 
+# returns the collision of a level. see LevelOrbCollision.gd
 func get_current_level():
 	var current_level = Collision.get_overlapping_areas()
 	if current_level.size() != 0:

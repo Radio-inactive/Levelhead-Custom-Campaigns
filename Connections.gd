@@ -1,9 +1,13 @@
+### Manages all connections on the map
 extends Node2D
 
 onready var LevelOrbs := $"../LevelOrbs"
+onready var RumpusReq := $"../RumpusRequests"
 const LevelConnection := preload("res://LevelConnections.gd")
 
+# creates all paths from scratch.
 func make_all_paths():
+	Util.delete_children(self)
 	var line_buf
 	for level in LevelOrbs.get_children():
 		#instantiate new line for each previous level
@@ -12,7 +16,7 @@ func make_all_paths():
 			line_buf.set_from_level_line(LevelOrbs.get_level_by_id(prev_level), level)
 			add_child(line_buf)
 
-
+# returns a list of paths going to/from a level orb
 func get_paths_from_node(levelId : String):
 	var arr_out : Array = []
 	for connection in get_children():
@@ -24,13 +28,3 @@ func get_paths_from_node(levelId : String):
 func refresh_all_paths():
 	for path in get_children():
 		path.refresh_path()
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

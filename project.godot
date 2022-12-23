@@ -29,7 +29,6 @@ config/icon="res://icon.png"
 MapEntityGeneric="*res://MapEntityGeneric.gd"
 RumpusURL="*res://RumpusURL.gd"
 Util="*res://Util.gd"
-RumpusAPI="*res://RumpusAPI.gd"
 
 [display]
 

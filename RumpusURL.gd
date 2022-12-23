@@ -1,3 +1,4 @@
+## Creates URLs to be used with the Rumpus API
 extends Node
 
 var use_beta := false

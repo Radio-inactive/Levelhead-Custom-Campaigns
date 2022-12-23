@@ -1,3 +1,4 @@
+### Manages the part of the UI displaying the level information
 extends PanelContainer
 
 onready var title := $VBoxContainer/TitleBookmark/LevelTitle
@@ -37,7 +38,7 @@ func _ready():
 func _on_SpaceShip_update_ui(level):
 	if level == null:
 		return
-	update_info_from_level(LevelOrbs.get_level_by_id(level.get_level_id()))
+	update_info_from_level(level.get_level())
 
 
 func _on_Node2D_update_ui(level):
@@ -78,4 +79,3 @@ func _on_BookmarkButton_toggled(button_pressed):
 	bookmark_status.text = "LOADING..."
 	bookmark_button.disabled = true
 	emit_signal("current_level_bookmark", SpaceShip.get_current_level().get_level_id(), button_pressed)
-

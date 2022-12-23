@@ -1,36 +1,26 @@
+### Level Orb found on the map
 extends MapEntityGeneric
 
 onready var Manager := $".."
 
-export(t_types) var t;
-#GR-17 present
-export(gr17_present) var ch : int
-#bug pieces present
-export(bug_pieces_present) var gr18 : int
-#on-time delivery
-export var b_time : float
-#requires all previous levels
-export(pre_all_previous_completed) var pre_all : int
-#requires all previous bug pieces
-export(pre_all_bug_pieces) var pre_gr18 : int
-#requires all jems of previous levels
-export(pre_coin_all) var pre_coin : int
-#requires all GR-17s of previous levels
-export(pre_chall_all) var pre_chall : int
-#list of IDs of previous nodes
-export var pre : PoolStringArray = ["preceeding levelIDs"]
-#name of the level
-export var n : String = "Level Name"
-#size of the sprite in the in-game map
-#export var scale : float #NOTE: ALREADY A NODE PROPERTY
+export(t_types) var t #node type. Level(0) in this case
+export(gr17_present) var ch : int #GR-17 present
+export(bug_pieces_present) var gr18 : int #bug pieces present
+export var b_time : float #on-time delivery
+export(pre_all_previous_completed) var pre_all : int #requires all previous levels
+export(pre_all_bug_pieces) var pre_gr18 : int #requires all previous bug pieces
+export(pre_coin_all) var pre_coin : int #requires all jems of previous levels
+export(pre_chall_all) var pre_chall : int #requires all GR-17s of previous levels
+export var pre : PoolStringArray #list of IDs of previous nodes
+export var n : String = "Level Name"#name of the level
 var x # x-position, set by getting position from godot
 var y # y-position, set by getting position from godot
-export(has_weather) var weather : int
-export(on_main_path) var main : int
-export(bm_biome) var bm : int
-export(sc_hidden) var sc : int
-export(scpre_hidden) var scpre : int
-export(scpost_hidden) var scpost : int
+export(has_weather) var weather : int #  does level have weather?
+export(on_main_path) var main : int # level is on the main path?
+export(bm_biome) var bm : int # biome of the level
+export(sc_hidden) var sc : int # Level is hidden before unlock?
+export(scpre_hidden) var scpre : int # previous paths are hidden before unlock?
+export(scpost_hidden) var scpost : int # following paths are hidden before unlock?
 
 #custom variables (not part of standard level node)
 export var levelID : String = "level code"
@@ -47,8 +37,14 @@ export var level_all_bug_pieces := false
 func is_first_level():
 	return pre.size() == 0
 
-
-
+func instance_from_json(json : Dictionary):
+	position = Vector2(json.x, json.y)
+	for key in json.keys():
+		if key in self:
+			self[key] = json[key]
+		else:
+			print("unknown member name: " + key)
+	print(position)
 #checks if all unlock conditions are met
 func check_unlock() -> bool:
 	#first level is always unlocked
@@ -89,8 +85,3 @@ func check_unlock() -> bool:
 func _ready():
 	x = global_position.x
 	y = global_position.y
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

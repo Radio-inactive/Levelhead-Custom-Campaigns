@@ -1,3 +1,4 @@
+### Collision of the Level Orb. Used to retrieve level information
 extends Area2D
 
 onready var LevelOrb := $".."
@@ -5,11 +6,6 @@ onready var LevelOrb := $".."
 func get_level_id() -> String:
 	return LevelOrb.levelID
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func get_level():
+	return LevelOrb
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

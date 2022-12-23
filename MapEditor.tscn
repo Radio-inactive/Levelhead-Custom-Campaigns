@@ -45,7 +45,6 @@ script = ExtResource( 3 )
 
 [node name="first_level" parent="LevelOrbs" instance=ExtResource( 2 )]
 position = Vector2( 381, 308 )
-pre = PoolStringArray(  )
 levelID = "lsdmv1t"
 
 [node name="second_level" parent="LevelOrbs" instance=ExtResource( 2 )]

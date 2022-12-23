@@ -1,4 +1,7 @@
+### Manages Level Orbs
 extends Node2D
+
+onready var connections := $"../Connections"
 
 const LevelOrb = preload("LevelOrb.gd")
 
@@ -42,14 +45,12 @@ func save_user_campaign_progress():
 func load_workshop_from_json():
 	pass #todo
 
-func load_user_campaign_from_json():
-	pass #todo
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func load_user_campaign_from_json(json):
+	Util.delete_children(self)
+	print(json)
+	if "MapNodes" in json:
+		for n in json["MapNodes"]:
+			#todo: add support for other nodes
+			var new_n = preload("res://LevelOrb.tscn").instance()
+			new_n.instance_from_json(n)
+			add_child(new_n)
