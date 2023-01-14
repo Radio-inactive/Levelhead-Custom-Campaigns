@@ -12,6 +12,8 @@ enum pre_chall_all {PREVIOUS_GR17S_NOT_REQUIRED = 0, PREVIOUS_GR17S_REQUIRED = 1
 enum has_weather {NO_WEATHER = 0, WEATHER = 1}
 enum on_main_path {NOT_ON_MAIN_PATH = 0, ON_MAIN_PATH = 1}
 enum bm_biome {TREE_OF_MAARLA = 0, KISTOON_RUINS = 1, AQUADUNES = 2, ASTEROID_TUNNELS = 3}
+# short string names used for biomes, used by animation
+const biome_names := ["maarla", "kistoon", "aquadunes", "asteroid"]
 enum sc_hidden {VISIBLE_BEFORE_UNLOCKED = 0, HIDDEN_UNTIL_UNLOCKED = 1}
 enum scpre_hidden {PREVIOUS_PATHS_VISIBLE_BEFORE_UNLOCKED = 0, PREVIOUS_PATHS_HIDDEN_UNTIL_UNLOCKED = 1}
 enum scpost_hidden {FOLLOWING_PATHS_VISIBLE_BEFORE_UNLOCKED = 0, FOLLOWING_PATHS_HIDDEN_UNTIL_UNLOCKED = 1}

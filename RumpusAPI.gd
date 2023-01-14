@@ -11,6 +11,8 @@ var url_params = JavaScript.get_interface("URLSearchParams")
 func _ready():
 	# Check if on browser. if so, get delegation key
 	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
+		# gets the delegation key from the local storage of the site it is run on.
+		# on the levelkit.netlify.app site, the delegation key is set in the site settings
 		if window.localStorage.getItem('DelegationKey') != null:
 			var js_user_data = parse_json(window.localStorage.getItem('DelegationKey'))
 			delegation_key = js_user_data.Key

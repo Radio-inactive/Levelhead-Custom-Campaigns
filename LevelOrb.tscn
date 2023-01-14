@@ -1,8 +1,69 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://LevelOrb.gd" type="Script" id=1]
-[ext_resource path="res://levelorb_beaten.png" type="Texture" id=2]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_0.png" type="Texture" id=2]
 [ext_resource path="res://LevelOrbCollision.gd" type="Script" id=3]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_asteroid_2.png" type="Texture" id=4]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_asteroid_3.png" type="Texture" id=5]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_jungle_1.png" type="Texture" id=6]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_jungle_3.png" type="Texture" id=7]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_jungle_2.png" type="Texture" id=8]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_1.png" type="Texture" id=9]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_jungle_0.png" type="Texture" id=10]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_asteroid_1.png" type="Texture" id=11]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_2.png" type="Texture" id=12]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_topper_0.png" type="Texture" id=13]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_desert_0.png" type="Texture" id=14]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_5.png" type="Texture" id=15]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_desert_2.png" type="Texture" id=16]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_desert_3.png" type="Texture" id=17]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_4.png" type="Texture" id=18]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_basket_0.png" type="Texture" id=19]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_3.png" type="Texture" id=20]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_desert_1.png" type="Texture" id=21]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "aquadunes",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "aquadunes_weather",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "asteroid",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "asteroid_weather",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "kistoon",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "kistoon_weather",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "maarla",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "maarla_weather",
+"speed": 5.0
+} ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 100.0
@@ -10,11 +71,23 @@ radius = 100.0
 [node name="LevelOrb" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="OrbModel" type="Node2D" parent="."]
+
+[node name="Antenna" type="Sprite" parent="OrbModel"]
+texture = ExtResource( 13 )
+offset = Vector2( 0, -117 )
+
+[node name="Main" type="AnimatedSprite" parent="OrbModel"]
+frames = SubResource( 2 )
+animation = "maarla"
+
+[node name="Bottom" type="Sprite" parent="OrbModel"]
+texture = ExtResource( 19 )
+offset = Vector2( 0, 93 )
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource( 1 )

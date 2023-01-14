@@ -4,19 +4,22 @@ extends Node2D
 onready var LevelOrbs := $LevelOrbs
 onready var SpaceShip := $SpaceShip
 onready var StartUI := $UI/PanelContainer
+onready var StartUIText := $UI/PanelContainer/VBoxContainer/Label
 onready var Connections := $Connections
 onready var RumpusReq := $RumpusRequests
+onready var StartMenu := $UI/BaseUI
 
 signal update_ui(level)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# get campaign from url
 	var url_cc = RumpusReq.get_user_campaign_from_param()
 	if url_cc != null:
 		LevelOrbs.load_user_campaign_from_json(url_cc)
-	var startPos = LevelOrbs.find_start_orb()
-	if startPos != null:
-		SpaceShip.position = startPos.position
+	else:
+		StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
+		StartMenu.show()
 	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
 		JavaScript.eval("console.log('I am running on a browser!')")
 
@@ -24,10 +27,13 @@ func _ready():
 func _on_StartButton_pressed():
 	Connections.make_all_paths()
 	SpaceShip.calculate_possible_movement()
-	for level in LevelOrbs.get_children():
+	for level in LevelOrbs.get_all_level_orbs():
 		level.check_unlock()
 		if level.is_first_level():
 			emit_signal("update_ui", level)
+	var startPos = LevelOrbs.find_start_orb()
+	if startPos != null:
+		SpaceShip.position = startPos.position
 	StartUI.hide()
 
 ## Completion Checkmarks
@@ -92,3 +98,9 @@ func _on_FoundGR17_toggled(button_pressed):
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
+
+
+func _on_BaseUI_load_campaign_from_start_menu(campaign):
+	LevelOrbs.load_user_campaign_from_json(campaign)
+	StartUIText.text = "Campaign: " + campaign.campaignName + " by " + campaign.creatorName
+	StartMenu.hide()

@@ -3,7 +3,10 @@ extends Node
 
 var use_beta := false
 
+# Base class for URL-related classes that fetch levels
 class URLBase:
+	var params : Dictionary
+	var sort_supported : PoolStringArray
 	#base URL functions
 	static func bscotch_net(is_api := true) -> String:
 		var url_out := ""
@@ -19,13 +22,10 @@ class URLBase:
 	
 	static func levelhead_api() -> String:
 		return bscotch_net() + "levelhead/"
-	
-	#common functions
-	var params : Dictionary
-	var sort_supported : PoolStringArray
-	#returns the finished URL
+
+	# returns the finished URL. Used for Level-related api calls
 	func get_url():
-		var url_out : String = bscotch_net() + "levelhead/levels"
+		var url_out : String = levelhead_api() + "levels"
 		var first_param := true
 		#iterate through parameters
 		for key in params.keys():
@@ -38,6 +38,8 @@ class URLBase:
 					first_param = false
 				url_out += key + "=" + String(params[key]).to_lower()
 		return url_out
+
+## The following classes are part of levels returned by the Rumpus API
 
 class Alias:
 	var userId : String = "???"
@@ -149,6 +151,8 @@ class Level:
 			else:
 				Util.apply_to_obj_from_dict(lv, self, key)
 
+## Level related URL classes
+
 class TowerLevelURL extends URLBase:
 	#a dictionary that contains the possible URL parameters
 	
@@ -203,9 +207,7 @@ class MDLevelURL extends URLBase:
 		}
 	
 
-##### URL Functions
-
-
+## URL Functions, not necessarily level related
 
 func bookmark_url(level_list : PoolStringArray) -> String:
 	var url_out = URLBase.levelhead_api() + "bookmarks/"
@@ -213,7 +215,7 @@ func bookmark_url(level_list : PoolStringArray) -> String:
 		url_out += level_code + ","
 	return url_out
 
-#### Constants
+## Constants, used for various things
 
 const TAGS_ALL = [
 	"ltag_brawler",

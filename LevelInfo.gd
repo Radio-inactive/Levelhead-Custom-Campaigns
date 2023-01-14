@@ -1,14 +1,14 @@
 ### Manages the part of the UI displaying the level information
 extends PanelContainer
 
-onready var title := $VBoxContainer/TitleBookmark/LevelTitle
-onready var completed := $VBoxContainer/Checks/CompletedCheck
-onready var all_jems := $VBoxContainer/Checks/AllJems
-onready var found_gr17 := $VBoxContainer/Checks/FoundGR17
-onready var all_bugs := $VBoxContainer/Checks/AllBugs
-onready var bench := $VBoxContainer/Checks/Benchmark
-onready var bookmark_status = $VBoxContainer/TitleBookmark/BookmarkStatus
-onready var bookmark_button = $VBoxContainer/TitleBookmark/BookmarkButton
+onready var title := $HBoxContainer/VBoxContainer/TitleBookmark/LevelTitle
+onready var completed := $HBoxContainer/VBoxContainer/Checks/CompletedCheck
+onready var all_jems := $HBoxContainer/VBoxContainer/Checks/AllJems
+onready var found_gr17 := $HBoxContainer/VBoxContainer/Checks/FoundGR17
+onready var all_bugs := $HBoxContainer/VBoxContainer/Checks/AllBugs
+onready var bench := $HBoxContainer/VBoxContainer/Checks/Benchmark
+onready var bookmark_status = $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkStatus
+onready var bookmark_button = $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton
 
 onready var LevelOrbs := $"../../LevelOrbs"
 

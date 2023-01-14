@@ -9,7 +9,7 @@ const LevelConnection := preload("res://LevelConnections.gd")
 func make_all_paths():
 	Util.delete_children(self)
 	var line_buf
-	for level in LevelOrbs.get_children():
+	for level in LevelOrbs.get_all_level_orbs():
 		#instantiate new line for each previous level
 		for prev_level in level.pre:
 			line_buf = preload("res://LevelConnectionLine.tscn").instance()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://campaign_BG.png" type="Texture" id=1]
 [ext_resource path="res://LevelOrb.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://RumpusRequests.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/bookmark_disabled.png" type="Texture" id=15]
 [ext_resource path="res://BaseUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://UI/save.png" type="Texture" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -45,6 +46,7 @@ script = ExtResource( 3 )
 
 [node name="first_level" parent="LevelOrbs" instance=ExtResource( 2 )]
 position = Vector2( 381, 308 )
+bm = 3
 levelID = "lsdmv1t"
 
 [node name="second_level" parent="LevelOrbs" instance=ExtResource( 2 )]
@@ -56,6 +58,8 @@ levelID = "0c5267f"
 position = Vector2( 1394, 300 )
 pre = PoolStringArray( "0c5267f" )
 n = "cool level"
+weather = 1
+bm = 2
 sc = 1
 levelID = "wb0lhhs"
 
@@ -63,6 +67,8 @@ levelID = "wb0lhhs"
 position = Vector2( 856, 1034 )
 pre_gr18 = 1
 pre = PoolStringArray( "0c5267f" )
+weather = 1
+bm = 1
 scpre = 1
 levelID = "tzmz046"
 
@@ -71,14 +77,118 @@ position = Vector2( 1350, 807 )
 pre_all = 1
 pre_coin = 1
 pre = PoolStringArray( "wb0lhhs", "tzmz046" )
+weather = 1
 sc = 1
 scpre = 1
 scpost = 1
 levelID = "hmt6wzj"
 
+[node name="Node" type="Node" parent="LevelOrbs"]
+
 [node name="SpaceShip" parent="." instance=ExtResource( 4 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="LevelInfo" type="PanelContainer" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -188.0
+theme = SubResource( 2 )
+script = ExtResource( 10 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/LevelInfo"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1913.0
+margin_bottom = 181.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
+margin_right = 771.0
+margin_bottom = 174.0
+
+[node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_right = 771.0
+margin_bottom = 93.0
+
+[node name="LevelTitle" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
+margin_top = 22.0
+margin_right = 294.0
+margin_bottom = 70.0
+text = "LEVEL NAME PLACEHOLDER"
+
+[node name="BookmarkButton" type="TextureButton" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
+margin_left = 298.0
+margin_right = 389.0
+margin_bottom = 93.0
+toggle_mode = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_disabled = ExtResource( 15 )
+
+[node name="BookmarkStatus" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
+margin_left = 393.0
+margin_top = 22.0
+margin_right = 393.0
+margin_bottom = 70.0
+
+[node name="Checks" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 97.0
+margin_right = 771.0
+margin_bottom = 168.0
+
+[node name="CompletedCheck" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
+margin_right = 197.0
+margin_bottom = 71.0
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked = ExtResource( 12 )
+text = "Completed"
+
+[node name="AllJems" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
+margin_left = 201.0
+margin_right = 373.0
+margin_bottom = 71.0
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked = ExtResource( 12 )
+text = "All Jems"
+
+[node name="FoundGR17" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
+margin_left = 377.0
+margin_right = 599.0
+margin_bottom = 71.0
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked = ExtResource( 12 )
+text = "Found GR-17"
+
+[node name="AllBugs" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
+margin_left = 603.0
+margin_right = 771.0
+margin_bottom = 71.0
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked = ExtResource( 12 )
+text = "All Bugs"
+
+[node name="Benchmark" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
+visible = false
+margin_left = 775.0
+margin_right = 918.0
+margin_bottom = 71.0
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked = ExtResource( 12 )
+text = "Bench"
+
+[node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
+margin_left = 775.0
+margin_right = 1616.0
+margin_bottom = 174.0
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="UI/LevelInfo/HBoxContainer"]
+margin_left = 1620.0
+margin_right = 1906.0
+margin_bottom = 174.0
+text = "SAVE PROGRESS"
+icon = ExtResource( 17 )
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchor_right = 1.0
@@ -109,101 +219,19 @@ margin_bottom = 454.0
 theme = ExtResource( 7 )
 text = "Start Campaign"
 
-[node name="LevelInfo" type="PanelContainer" parent="UI"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -188.0
-theme = SubResource( 2 )
-script = ExtResource( 10 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1913.0
-margin_bottom = 181.0
-
-[node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/VBoxContainer"]
-margin_right = 1906.0
-margin_bottom = 93.0
-
-[node name="LevelTitle" type="Label" parent="UI/LevelInfo/VBoxContainer/TitleBookmark"]
-margin_top = 22.0
-margin_right = 294.0
-margin_bottom = 70.0
-text = "LEVEL NAME PLACEHOLDER"
-
-[node name="BookmarkButton" type="TextureButton" parent="UI/LevelInfo/VBoxContainer/TitleBookmark"]
-margin_left = 298.0
-margin_right = 389.0
-margin_bottom = 93.0
-toggle_mode = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 9 )
-texture_disabled = ExtResource( 15 )
-
-[node name="BookmarkStatus" type="Label" parent="UI/LevelInfo/VBoxContainer/TitleBookmark"]
-margin_left = 393.0
-margin_top = 22.0
-margin_right = 393.0
-margin_bottom = 70.0
-
-[node name="Checks" type="HBoxContainer" parent="UI/LevelInfo/VBoxContainer"]
-margin_top = 97.0
-margin_right = 1906.0
-margin_bottom = 168.0
-
-[node name="CompletedCheck" type="CheckBox" parent="UI/LevelInfo/VBoxContainer/Checks"]
-margin_right = 197.0
-margin_bottom = 71.0
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "Completed"
-
-[node name="AllJems" type="CheckBox" parent="UI/LevelInfo/VBoxContainer/Checks"]
-margin_left = 201.0
-margin_right = 373.0
-margin_bottom = 71.0
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "All Jems"
-
-[node name="FoundGR17" type="CheckBox" parent="UI/LevelInfo/VBoxContainer/Checks"]
-margin_left = 377.0
-margin_right = 599.0
-margin_bottom = 71.0
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "Found GR-17"
-
-[node name="AllBugs" type="CheckBox" parent="UI/LevelInfo/VBoxContainer/Checks"]
-margin_left = 603.0
-margin_right = 771.0
-margin_bottom = 71.0
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "All Bugs"
-
-[node name="Benchmark" type="CheckBox" parent="UI/LevelInfo/VBoxContainer/Checks"]
-visible = false
-margin_left = 775.0
-margin_right = 918.0
-margin_bottom = 71.0
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "Bench"
-
 [node name="BaseUI" parent="UI" instance=ExtResource( 16 )]
 visible = false
 
 [connection signal="update_ui" from="." to="UI/LevelInfo" method="_on_Node2D_update_ui"]
 [connection signal="bookmark_set_result" from="RumpusRequests" to="UI/LevelInfo" method="_on_RumpusRequests_bookmark_set_result"]
 [connection signal="update_ui" from="SpaceShip" to="UI/LevelInfo" method="_on_SpaceShip_update_ui"]
-[connection signal="pressed" from="UI/PanelContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="current_level_bookmark" from="UI/LevelInfo" to="RumpusRequests" method="_on_LevelInfo_current_level_bookmark"]
-[connection signal="toggled" from="UI/LevelInfo/VBoxContainer/TitleBookmark/BookmarkButton" to="UI/LevelInfo" method="_on_BookmarkButton_toggled"]
-[connection signal="toggled" from="UI/LevelInfo/VBoxContainer/Checks/CompletedCheck" to="." method="_on_CompletedCheck_toggled"]
-[connection signal="toggled" from="UI/LevelInfo/VBoxContainer/Checks/AllJems" to="." method="_on_AllJems_toggled"]
-[connection signal="toggled" from="UI/LevelInfo/VBoxContainer/Checks/FoundGR17" to="." method="_on_FoundGR17_toggled"]
-[connection signal="toggled" from="UI/LevelInfo/VBoxContainer/Checks/AllBugs" to="." method="_on_AllBugs_toggled"]
-[connection signal="toggled" from="UI/LevelInfo/VBoxContainer/Checks/Benchmark" to="." method="_on_Benchmark_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton" to="UI/LevelInfo" method="_on_BookmarkButton_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/CompletedCheck" to="." method="_on_CompletedCheck_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllJems" to="." method="_on_AllJems_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/FoundGR17" to="." method="_on_FoundGR17_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllBugs" to="." method="_on_AllBugs_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/Benchmark" to="." method="_on_Benchmark_toggled"]
+[connection signal="pressed" from="UI/LevelInfo/HBoxContainer/SaveButton" to="LevelOrbs" method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="UI/PanelContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="load_campaign_from_start_menu" from="UI/BaseUI" to="." method="_on_BaseUI_load_campaign_from_start_menu"]

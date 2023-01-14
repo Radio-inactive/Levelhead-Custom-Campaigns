@@ -2,6 +2,7 @@
 extends MapEntityGeneric
 
 onready var Manager := $".."
+onready var OrbModel := $OrbModel/Main
 
 export(t_types) var t #node type. Level(0) in this case
 export(gr17_present) var ch : int #GR-17 present
@@ -29,10 +30,43 @@ export var level_all_jems := false
 export var level_found_gr17 := false
 export var level_all_bug_pieces := false
 
+const dictionary_base : Dictionary = \
+{
+	"t":0,
+	"ch":0,
+	"gr18":0,
+	"b_time":0,
+	"pre_all":0,
+	"pre_gr18":0,
+	"pre_coin":0,
+	"pre_chall":0,
+	"pre":[],
+	"n":"std",
+	"x":0,
+	"y":0,
+	"weather":0,
+	"main":0,
+	"bm":0,
+	"sc":0,
+	"scpre":0,
+	"scpost":0,
+	"levelID":"std",
+	"level_completed":false,
+	"level_all_jems":false,
+	"level_found_gr17":false,
+	"level_all_bug_pieces":false
+}
+
 #not needed in levels:
 # export var dat : String - likely not necessary for web map
 # pre_actual - id of the level/presentation/icon pack at the start of this series of path nodes (only appears on path assist nodes)
 # post_actual - id of the level/presentation/icon pack at the end of this series of path nodes (only appears on path assist nodes)
+
+func to_dictionary() -> Dictionary:
+	var dict_out := dictionary_base.duplicate(true)
+	for key in dict_out.keys():
+		dict_out[key] = self[key]
+	return dict_out
 
 func is_first_level():
 	return pre.size() == 0
@@ -45,6 +79,7 @@ func instance_from_json(json : Dictionary):
 		else:
 			print("unknown member name: " + key)
 	print(position)
+
 #checks if all unlock conditions are met
 func check_unlock() -> bool:
 	#first level is always unlocked
@@ -85,3 +120,4 @@ func check_unlock() -> bool:
 func _ready():
 	x = global_position.x
 	y = global_position.y
+	OrbModel.play(biome_names[bm] + ("_weather" if weather == 1 else ""))
