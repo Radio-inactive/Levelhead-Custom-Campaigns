@@ -17,6 +17,7 @@ func _ready():
 	var url_cc = RumpusReq.get_user_campaign_from_param()
 	if url_cc != null:
 		LevelOrbs.load_user_campaign_from_json(url_cc)
+		StartUIText.text = "Campaign: " + url_cc.campaignName + " by " + url_cc.creatorName
 	else:
 		StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
 		StartMenu.show()
@@ -26,12 +27,14 @@ func _ready():
 # start button builds all paths
 func _on_StartButton_pressed():
 	Connections.make_all_paths()
+	var startPos = LevelOrbs.find_start_orb()
+	SpaceShip.current_orb = startPos
 	SpaceShip.calculate_possible_movement()
 	for level in LevelOrbs.get_all_level_orbs():
 		level.check_unlock()
 		if level.is_first_level():
 			emit_signal("update_ui", level)
-	var startPos = LevelOrbs.find_start_orb()
+	
 	if startPos != null:
 		SpaceShip.position = startPos.position
 	StartUI.hide()
@@ -42,11 +45,10 @@ func _on_CompletedCheck_toggled(button_pressed):
 	# de-completing is buggy and thus not allowed
 	if !button_pressed:
 		return
-	var curr_lvl = SpaceShip.get_current_level()
+	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		LevelOrbs.get_level_by_id(curr_lvl.get_level_id()) \
-		.level_completed = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.get_level_id())
+		curr_lvl.level_completed = button_pressed
+		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
@@ -54,11 +56,10 @@ func _on_CompletedCheck_toggled(button_pressed):
 func _on_AllJems_toggled(button_pressed):
 	if !button_pressed:
 		return
-	var curr_lvl = SpaceShip.get_current_level()
+	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		LevelOrbs.get_level_by_id(curr_lvl.get_level_id()) \
-		.level_all_jems = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.get_level_id())
+		curr_lvl.level_all_jems = button_pressed
+		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
@@ -66,11 +67,10 @@ func _on_AllJems_toggled(button_pressed):
 func _on_AllBugs_toggled(button_pressed):
 	if !button_pressed:
 		return
-	var curr_lvl = SpaceShip.get_current_level()
+	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		LevelOrbs.get_level_by_id(curr_lvl.get_level_id()) \
-		.level_all_bug_pieces = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.get_level_id())
+		curr_lvl.level_all_bug_pieces = button_pressed
+		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
@@ -78,11 +78,10 @@ func _on_AllBugs_toggled(button_pressed):
 func _on_Benchmark_toggled(button_pressed): #ToDo: how are benchmarks handled?
 	if !button_pressed:
 		return
-	var curr_lvl = SpaceShip.get_current_level()
+	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		LevelOrbs.get_level_by_id(curr_lvl.get_level_id()) \
-		.level_completed = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.get_level_id())
+		curr_lvl.level_completed = button_pressed
+		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
@@ -90,15 +89,14 @@ func _on_Benchmark_toggled(button_pressed): #ToDo: how are benchmarks handled?
 func _on_FoundGR17_toggled(button_pressed):
 	if !button_pressed:
 		return
-	var curr_lvl = SpaceShip.get_current_level()
+	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		LevelOrbs.get_level_by_id(curr_lvl.get_level_id()) \
-		.level_found_gr17 = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.get_level_id())
+		curr_lvl.level_found_gr17 = button_pressed
+		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
-
+## When a level is selected in the start menu
 
 func _on_BaseUI_load_campaign_from_start_menu(campaign):
 	LevelOrbs.load_user_campaign_from_json(campaign)

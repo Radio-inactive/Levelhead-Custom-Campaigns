@@ -7,27 +7,21 @@ onready var Collision := $Area2D
 onready var LevelOrbs := $"../LevelOrbs"
 onready var DirectionArrows := $DirectionArrows
 
+const LevelOrb = preload("LevelOrb.gd")
+
+var current_orb : LevelOrb = null
+
 signal update_ui(level)
 
-# returns the collision of a level. see LevelOrbCollision.gd
-func get_current_level():
-	var current_level = Collision.get_overlapping_areas()
-	if current_level.size() != 0:
-		current_level = current_level[0]
-		return current_level
-	else:
-		return null
-
 func calculate_possible_movement():
-	var current_level = get_current_level()
-	if current_level == null:
+	if current_orb == null:
 		return
-	var paths = Connections.get_paths_from_node(current_level.get_level_id())
+	var paths = Connections.get_paths_from_node(current_orb.levelID)
 	var path_buf
 	var level_buf
 	for path in paths:
 		path_buf = preload("res://MapArrow.tscn").instance()
-		if path.destination == current_level.get_level_id():
+		if path.destination == current_orb.levelID:
 			path_buf.destination = path.origin
 		else:
 			path_buf.destination = path.destination
@@ -41,16 +35,12 @@ func calculate_possible_movement():
 func _ready():
 	cam.make_current()
 
-static func delete_children(node):
-	for n in node.get_children():
-		node.remove_child(n)
-		n.queue_free()
-
 func _on_move_ship_to(destination):
 	print_debug("ARROW DEST. " + destination)
-	var level = LevelOrbs.get_level_by_id(destination)
+	var level : LevelOrb = LevelOrbs.get_level_by_id(destination)
 	if level != null:
-		delete_children(DirectionArrows)
+		current_orb = level
+		Util.delete_children(DirectionArrows)
 		var tween = get_node("Tween")
 		tween.interpolate_property(self, "position",
 		position, level.position, 0.5,
@@ -61,5 +51,5 @@ func _on_move_ship_to(destination):
 
 func _on_Tween_tween_completed(_object, _key):
 	calculate_possible_movement()
-	emit_signal("update_ui", get_current_level())
+	emit_signal("update_ui", current_orb)
 	$Sprite.rotation = 0

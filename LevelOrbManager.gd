@@ -2,6 +2,7 @@
 extends Node2D
 
 onready var connections := $"../Connections"
+onready var LandmarkManager := $"../LandmarkManager"
 
 const LevelOrb = preload("LevelOrb.gd")
 const user_campaign_base = \
@@ -10,7 +11,8 @@ const user_campaign_base = \
 "creatorCode":"fck11l",
 "campaignName":"campaign_test",
 "version":1,
-"mapNodes":[]
+"mapNodes":[],
+"landmarks":[]
 }
 
 var window = JavaScript.get_interface("window")
@@ -19,7 +21,6 @@ var campaignName : String = ""
 var creatorName : String = ""
 var creatorCode : String = ""
 var version : int = 1
-
 
 func find_start_orb() -> LevelOrb:
 	for level in get_all_level_orbs():
@@ -87,12 +88,14 @@ func save_user_campaign():
 	dict_out.creatorCode = creatorCode
 	dict_out.version = version
 	dict_out.mapNodes = get_levels_as_dict_arr()
+	dict_out.landmarks = LandmarkManager.get_landmarks_as_dict_array()
 	
 	Util.set_file(get_campaign_id(), JSON.print(dict_out), "SavedCampaigns/Saved/")
 	 
 
 func load_user_campaign_from_json(json):
 	Util.delete_children(self)
+	Util.delete_children(LandmarkManager)
 	print(json)
 	# get meta data from json
 	campaignName = json.campaignName if "campaignName" in json else "NO NAME"
@@ -112,6 +115,8 @@ func load_user_campaign_from_json(json):
 			var new_n = preload("res://LevelOrb.tscn").instance()
 			new_n.instance_from_json(n)
 			add_child(new_n)
+	if "landmarks" in json:
+		LandmarkManager.load_landmarks_from_array(json.landmarks)
 
 
 func _on_SaveButton_pressed():

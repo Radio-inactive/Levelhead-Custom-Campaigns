@@ -75,7 +75,10 @@ func instance_from_json(json : Dictionary):
 	position = Vector2(json.x, json.y)
 	for key in json.keys():
 		if key in self:
-			self[key] = json[key]
+			if key == "scale":
+				scale = Vector2(json[key], json[key])
+			else:
+				self[key] = json[key]
 		else:
 			print("unknown member name: " + key)
 	print(position)

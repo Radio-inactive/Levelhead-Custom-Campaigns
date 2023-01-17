@@ -38,7 +38,7 @@ func _ready():
 func _on_SpaceShip_update_ui(level):
 	if level == null:
 		return
-	update_info_from_level(level.get_level())
+	update_info_from_level(level)
 
 
 func _on_Node2D_update_ui(level):
