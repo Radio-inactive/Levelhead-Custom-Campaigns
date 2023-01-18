@@ -1,4 +1,4 @@
-extends ParallaxBackground
+extends Node2D
 
 var Landmark := load("res://Landmark.tscn")
 

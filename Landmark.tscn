@@ -138,9 +138,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Landmark" type="ParallaxLayer"]
-script = ExtResource( 24 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite"]
 frames = SubResource( 1 )
 animation = "1"
+script = ExtResource( 24 )
