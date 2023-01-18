@@ -40,8 +40,8 @@ func instance_from_json(json):
 				factor /= 100
 				factor = factor*factor
 				depthFactor = factor
-				# motion_scale = Vector2(factor,factor)
-				motion_scale = Vector2(json[key],json[key])
+			elif key == "rot":
+				rotation_degrees = -json.rot
 			#ToDo: implement motion
 		else:
 			print("PROPERTY NOT KNOWN: " + key)
