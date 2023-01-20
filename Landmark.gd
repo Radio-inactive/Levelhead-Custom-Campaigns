@@ -2,13 +2,18 @@ extends AnimatedSprite
 
 var x := 0
 var y := 0
-var xsp := 0
-var elId := 0 # ID of the landmark graphics
-var rot := 0 # rotation
-var dep := 0 # "depth" = parallax
+export var xsp := 0
+enum lm_type{HUGE_ASTEROID = 0, SMALL_ASTEROID, MEDIUM_ASTEROID, BS_HQ, SQUID,
+			 TERRARIUM, GRAY_PLANET, MASSIVE_CORAL, RED_CONTAINER, GREEN_CONTAINER,
+			 ORANGE_CONTAINER, GRAY_CONTAINER, CORAL_PIECE, LONG_CORAL, WHIRL_CORAL,
+			 WHITE_PLANET, BLUE_PLANET, EYE_PLANET, ASTEROID_PIECE_1, ASTEROID_PIECE_2,
+			 UNUSED_SATURN, UNUSED_SEMIPLANET}
+export(lm_type) var elId := 0 # ID of the landmark graphics
+export var rot := 0 # rotation
+export var dep := 0 # "depth" = parallax
 var depthFactor: float = 0 # 0 menas attached to world, 1 means attached to camera
-var rsp := 0 # rotation speed
-var sc := 1 # scale
+export var rsp := 0 # rotation speed
+export var sc := 1 # scale
 var world_pos := Vector2.ZERO
 var world_scale : = Vector2.ONE
 
@@ -56,7 +61,10 @@ func to_dict() -> Dictionary:
 
 func _ready():
 	play(String(elId))
+	x = position.x
+	y = position.y
 	
+
 func _process(_delta):
 	var cam = getCurrentCamera2D()
 	if not cam:
