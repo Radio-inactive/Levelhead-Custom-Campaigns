@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://MediumYanoneFont.tres" type="Theme" id=1]
 [ext_resource path="res://BaseUI.gd" type="Script" id=2]
 [ext_resource path="res://CC_logo_small.png" type="Texture" id=3]
+[ext_resource path="res://UI/back_yellow.png" type="Texture" id=4]
+[ext_resource path="res://UI/back_white.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.156863, 0.156863, 0.156863, 1 )
@@ -138,5 +140,16 @@ custom_styles/panel = SubResource( 2 )
 margin_right = 40.0
 margin_bottom = 14.0
 
+[node name="Return" type="TextureButton" parent="."]
+margin_right = 117.0
+margin_bottom = 119.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 4 )
+
 [connection signal="item_activated" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer/Campaigns" to="." method="_on_Campaigns_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer/Campaigns" to="." method="_on_Campaigns_item_selected"]
+[connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]

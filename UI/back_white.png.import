@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Asteroid.png-6a2beef799ce4de55b7b118292efe271.stex"
+path="res://.import/back_white.png-3a45b8cced58042e7aab9642dd77fb44.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GIMP Assets/Asteroid.png"
-dest_files=[ "res://.import/Asteroid.png-6a2beef799ce4de55b7b118292efe271.stex" ]
+source_file="res://UI/back_white.png"
+dest_files=[ "res://.import/back_white.png-3a45b8cced58042e7aab9642dd77fb44.stex" ]
 
 [params]
 

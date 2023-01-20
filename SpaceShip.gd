@@ -14,6 +14,7 @@ var current_orb : LevelOrb = null
 signal update_ui(level)
 
 func calculate_possible_movement():
+	Util.delete_children(DirectionArrows)
 	if current_orb == null:
 		return
 	var paths = Connections.get_paths_from_node(current_orb.levelID)

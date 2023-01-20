@@ -17,9 +17,9 @@ const user_campaign_base = \
 
 var window = JavaScript.get_interface("window")
 
-var campaignName : String = ""
-var creatorName : String = ""
-var creatorCode : String = ""
+var campaignName : String = "NO CAMPAIGN NAME"
+var creatorName : String = "UNKNOWN CREATOR"
+var creatorCode : String = "NO CREATOR CODE"
 var version : int = 1
 
 func find_start_orb() -> LevelOrb:
@@ -60,7 +60,6 @@ func get_all_level_orbs() -> Array:
 func get_all_saved_campaigns() -> Array:
 	var campaigns_out := []
 	campaigns_out = Util.get_files_that_match_uc("SavedCampaigns/Saved/")
-	print(campaigns_out)
 	return campaigns_out
 
 func get_campaign_id() -> String:
@@ -96,7 +95,6 @@ func save_user_campaign():
 func load_user_campaign_from_json(json):
 	Util.delete_children(self)
 	Util.delete_children(LandmarkManager)
-	print(json)
 	# get meta data from json
 	campaignName = json.campaignName if "campaignName" in json else "NO NAME"
 	creatorName = json.creatorName if "creatorName" in json else "ANONYMOUS"

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Maarla.png-6730e9e35325711b493251be110421cc.stex"
+path="res://.import/back_yellow.png-914c3fb3e465aa9bb4d8cc1bee7c79e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GIMP Assets/Maarla.png"
-dest_files=[ "res://.import/Maarla.png-6730e9e35325711b493251be110421cc.stex" ]
+source_file="res://UI/back_yellow.png"
+dest_files=[ "res://.import/back_yellow.png-914c3fb3e465aa9bb4d8cc1bee7c79e4.stex" ]
 
 [params]
 

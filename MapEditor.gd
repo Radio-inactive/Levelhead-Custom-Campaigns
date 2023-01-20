@@ -29,6 +29,7 @@ func _on_StartButton_pressed():
 	Connections.make_all_paths()
 	var startPos = LevelOrbs.find_start_orb()
 	SpaceShip.current_orb = startPos
+	SpaceShip.position = startPos.position
 	SpaceShip.calculate_possible_movement()
 	for level in LevelOrbs.get_all_level_orbs():
 		level.check_unlock()
@@ -100,5 +101,11 @@ func _on_FoundGR17_toggled(button_pressed):
 
 func _on_BaseUI_load_campaign_from_start_menu(campaign):
 	LevelOrbs.load_user_campaign_from_json(campaign)
+	StartUI.show()
 	StartUIText.text = "Campaign: " + campaign.campaignName + " by " + campaign.creatorName
 	StartMenu.hide()
+
+
+func _on_Return_pressed():
+	StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
+	StartMenu.show()
