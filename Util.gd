@@ -67,6 +67,9 @@ func get_files_that_match_uc(folder : String):
 			file_buf.close()
 			if campaign_out.error == OK:
 				files.append(campaign_out.result)
+			else:
+				printerr("Error %d while parsing %s at line %d:" % [campaign_out.error, file, campaign_out.error_line])
+				printerr(campaign_out.error_string)
 	
 	dir.list_dir_end()
 	

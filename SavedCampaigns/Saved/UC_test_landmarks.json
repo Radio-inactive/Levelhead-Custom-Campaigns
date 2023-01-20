@@ -1,0 +1,218 @@
+{
+	"creatorName": "Definitely Radio",
+	"creatorCode": "fck11l",
+	"campaignName": "Landmarks test",
+	"version": 1,
+	"mapNodes": [
+		{
+			"t": 0,
+			"ch": 0,
+			"gr18": 0,
+			"b_time": 0,
+			"pre_all": 0,
+			"pre_gr18": 0,
+			"pre_coin": 0,
+			"pre_chall": 0,
+			"pre": [],
+			"n": "LEVEL 1",
+			"x": 50,
+			"y": 50,
+			"weather": 0,
+			"main": 0,
+			"bm": 0,
+			"sc": 0,
+			"scpre": 0,
+			"scpost": 0,
+			"levelID": "lsdmv1t",
+			"level_completed": true,
+			"level_all_jems": true,
+			"level_found_gr17": true,
+			"level_all_bug_pieces": true
+		},
+		{
+			"t": 0,
+			"ch": 0,
+			"gr18": 0,
+			"b_time": 0,
+			"pre_all": 0,
+			"pre_gr18": 0,
+			"pre_coin": 0,
+			"pre_chall": 0,
+			"pre": [
+				"lsdmv1t"
+			],
+			"n": "LEVEL 2",
+			"x": 900,
+			"y": 500,
+			"weather": 0,
+			"main": 0,
+			"bm": 0,
+			"sc": 0,
+			"scpre": 0,
+			"scpost": 0,
+			"levelID": "bc87xnf",
+			"level_completed": true,
+			"level_all_jems": true,
+			"level_found_gr17": true,
+			"level_all_bug_pieces": true
+		}
+	],
+	"landmarks": [
+		{
+			"elId": 7,
+			"y": -31,
+			"rot": 7,
+			"x": 3470,
+			"dep": 0
+		},
+		{
+			"elId": 14,
+			"y": 497,
+			"rot": 8,
+			"x": 851,
+			"dep": 0
+		},
+		{
+			"elId": 3,
+			"y": -9,
+			"rot": -13,
+			"x": 1369,
+			"dep": 0
+		},
+		{
+			"elId": 19,
+			"y": 574,
+			"rot": 5,
+			"x": 2.5550000009095e25,
+			"dep": 0
+		},
+		{
+			"elId": 10,
+			"y": 445,
+			"rot": 6,
+			"x": -162,
+			"dep": 0
+		},
+		{
+			"elId": 1,
+			"y": 30,
+			"rot": -7,
+			"x": 620,
+			"dep": 0
+		},
+		{
+			"elId": 13,
+			"y": 497,
+			"rot": -4,
+			"x": 493,
+			"dep": 0
+		},
+		{
+			"elId": 18,
+			"y": 569,
+			"rot": -20,
+			"x": 2269,
+			"dep": 0
+		},
+		{
+			"elId": 9,
+			"y": -16,
+			"rot": -3,
+			"x": 4088,
+			"dep": 0
+		},
+		{
+			"elId": 6,
+			"y": 51,
+			"rot": -9,
+			"x": 2873,
+			"dep": 0
+		},
+		{
+			"elId": 15,
+			"y": 570,
+			"rot": -2,
+			"x": 1.2250000009095e25,
+			"dep": 0
+		},
+		{
+			"elId": 11,
+			"y": 431,
+			"rot": 0,
+			"x": 6,
+			"dep": 0
+		},
+		{
+			"elId": 16,
+			"y": 554,
+			"rot": 13,
+			"x": 1.5390000009095e25,
+			"dep": 0
+		},
+		{
+			"elId": 4,
+			"y": -76,
+			"rot": -11,
+			"x": 2054,
+			"dep": 0
+		},
+		{
+			"elId": 2,
+			"y": 94,
+			"rot": -10,
+			"x": 887,
+			"dep": 0
+		},
+		{
+			"elId": 17,
+			"y": 0,
+			"rot": -13,
+			"x": 0,
+			"dep": 70
+		},
+		{
+			"elId": 17,
+			"y": 539,
+			"rot": 0,
+			"x": 1927,
+			"dep": 0
+		},
+		{
+			"1": 0,
+			"elId": 0,
+			"sc": 1,
+			"2": 1000,
+			"x": 275,
+			"dep": 0
+		},
+		{
+			"elId": 5,
+			"y": -542,
+			"rot": -7,
+			"x": 2768,
+			"dep": 0
+		},
+		{
+			"y": 0,
+			"elId": 16,
+			"sc": 2,
+			"rot": -10,
+			"x": 0,
+			"dep": 40
+		},
+		{
+			"elId": 12,
+			"y": 400,
+			"rot": 12,
+			"x": 250,
+			"dep": 0
+		},
+		{
+			"elId": 8,
+			"y": 19,
+			"rot": -10,
+			"x": 3900,
+			"dep": 0
+		}
+	]
+}
