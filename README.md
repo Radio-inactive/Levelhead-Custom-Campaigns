@@ -4,19 +4,19 @@ A Godot game used to create custom campaigns and bookmark levels for Levelhead u
 The purpose of the Custom Campaigns is to host the Community Campaign as well as other user-made campaigns in the future!
 ## The ToDo List
 **There's many things left to do, so I decided to make a list here:**
-1. Saving and Loading
-   * Save custom campaigns as JSON
-   * Save progress made on other user's custom campaigns
-   * Load levels from JSON file
-   * Implement the UI for all of these
+1. ~~Saving and Loading~~
+   * ~~Save custom campaigns as JSON~~
+   * ~~Save progress made on other user's custom campaigns~~
+   * ~~Load levels from JSON file~~
+   * ~~Implement the UI for all of these~~
 2. Add missing map features
-   * Add visual map nodes
+   * ~~Add visual map nodes~~
    * Maybe add VEND-Rs
-   * Add scale and rotation properties
-   * Add Level Orb visuals (change by biome, show missing collectibles near orb)
+   * Add ~~scale~~ and rotation properties
+   * Add Level Orb visuals (~~change by biome~~, show missing collectibles near orb)
 3. Extend Rumpus API functionality
-   * Save delegation key
-   * Get user information from delegation key
+   * Save delegation key -> online only so far
+   * ~~Get user information from delegation key~~
    * Get level names from the API
 4. Community Campaign
    * Add as a Seperate option from own and other people's levels
