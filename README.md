@@ -28,6 +28,10 @@ The purpose of the Custom Campaigns is to host the Community Campaign as well as
    * Implement drag n drop
    * Implement menus to change all relevant values
    * Add a convenient way to share levels
+7. UI
+   * Add button for copying level code
+   * Make window size responsive
+   * Explanations and Delegation Key related stuff
 
 ## Misc info
 * This is a fan project. Not affiliated with [Butterscotch Shenanigans](https://www.bscotch.net/ "Butterscotch Shenanigan's official website") (The creators of [Levelhead](https://www.bscotch.net/games/levelhead "Levelhead's official site")).
