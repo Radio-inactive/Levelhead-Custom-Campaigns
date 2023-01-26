@@ -20,6 +20,8 @@ func load_saved_campaigns(campaigns : Array):
 			SavedCampaigns.set_item_metadata(SavedCampaigns.get_item_count()-1, campaign)
 	CampaignTitle.text = ""
 
+func show_return():
+	$Return.show()
 
 func _on_Campaigns_item_selected(index):
 	if "campaignName" in SavedCampaigns.get_item_metadata(index):
@@ -30,14 +32,14 @@ func _on_Campaigns_item_selected(index):
 
 func _on_Campaigns_item_activated(index):
 	emit_signal("load_campaign_from_start_menu", SavedCampaigns.get_item_metadata(index))
-
+	show_return()
 
 func _on_Return_pressed():
 	hide()
 
 func _ready():
 	if HIDE_RETURN_ON_START_FLAG:
-		$Return.hide()
+		show_return()
 
 
 func _on_Load_pressed():

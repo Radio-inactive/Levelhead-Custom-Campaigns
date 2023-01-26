@@ -17,6 +17,7 @@ func _ready():
 	var url_cc = RumpusReq.get_user_campaign_from_param()
 	if url_cc != null:
 		LevelOrbs.load_user_campaign_from_json(url_cc)
+		StartMenu.show_return()
 		StartUI.show()
 		StartUIText.text = "Campaign: " + url_cc.campaignName + " by " + url_cc.creatorName
 	else:
@@ -111,7 +112,6 @@ func _on_BaseUI_load_campaign_from_start_menu(campaign):
 	StartUI.show()
 	StartUIText.text = "Campaign: " + campaign.campaignName + " by " + campaign.creatorName
 	StartMenu.hide()
-
 
 func _on_Return_pressed():
 	StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
