@@ -107,17 +107,11 @@ margin_bottom = 986.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer"]
+[node name="Campaigns" type="ItemList" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 493.0
 margin_bottom = 903.0
-size_flags_vertical = 3
-scroll_horizontal_enabled = false
-
-[node name="Campaigns" type="ItemList" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer"]
-margin_right = 486.0
-margin_bottom = 896.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -150,6 +144,6 @@ texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 5 )
 texture_disabled = ExtResource( 4 )
 
-[connection signal="item_activated" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer/Campaigns" to="." method="_on_Campaigns_item_activated"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer/Campaigns" to="." method="_on_Campaigns_item_selected"]
+[connection signal="item_activated" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_activated"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_selected"]
 [connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]

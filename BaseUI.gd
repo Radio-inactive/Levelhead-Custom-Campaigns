@@ -1,36 +1,34 @@
 extends PanelContainer
 
 onready var CampaignTitle := $VBoxContainer/CampaignTitle/Label
-onready var SavedCampaigns := $VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/ScrollContainer/Campaigns
+onready var SavedCampaigns := $VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns
 
 export var HIDE_RETURN_ON_START_FLAG := true
-
-var saved_campaigns_dict : Array
 
 signal load_campaign_from_start_menu(campaign)
 
 func load_saved_campaigns(campaigns : Array):
 	SavedCampaigns.clear()
-	saved_campaigns_dict.clear()
 	for campaign in campaigns:
 		if "creatorName" in campaign:
 			SavedCampaigns.add_item(campaign.creatorName)
+			SavedCampaigns.set_item_metadata(SavedCampaigns.get_item_count()-1, campaign)
 		else:
 			SavedCampaigns.add_item("Unknown Creator")
-	saved_campaigns_dict = campaigns
+			SavedCampaigns.set_item_metadata(SavedCampaigns.get_item_count()-1, campaign)
 	CampaignTitle.text = ""
 
 
 func _on_Campaigns_item_selected(index):
-	if "campaignName" in saved_campaigns_dict[index]:
-		CampaignTitle.text = saved_campaigns_dict[index].campaignName
+	if "campaignName" in SavedCampaigns.get_item_metadata(index):
+		CampaignTitle.text = SavedCampaigns.get_item_metadata(index).campaignName
 	else:
 		CampaignTitle.text = "No Title."
 	
 
 
 func _on_Campaigns_item_activated(index):
-	emit_signal("load_campaign_from_start_menu", saved_campaigns_dict[index])
+	emit_signal("load_campaign_from_start_menu", SavedCampaigns.get_item_metadata(index))
 
 
 func _on_Return_pressed():

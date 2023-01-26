@@ -17,12 +17,11 @@ func _ready():
 	var url_cc = RumpusReq.get_user_campaign_from_param()
 	if url_cc != null:
 		LevelOrbs.load_user_campaign_from_json(url_cc)
+		StartUI.show()
 		StartUIText.text = "Campaign: " + url_cc.campaignName + " by " + url_cc.creatorName
 	else:
 		StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
 		StartMenu.show()
-	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
-		JavaScript.eval("console.log('I am running on a browser!')")
 
 # start button builds all paths
 func _on_StartButton_pressed():
@@ -46,6 +45,7 @@ func _on_CompletedCheck_toggled(button_pressed):
 	# de-completing is buggy and thus not allowed
 	if !button_pressed:
 		return
+	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/CompletedCheck.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
 		curr_lvl.level_completed = button_pressed
@@ -57,6 +57,7 @@ func _on_CompletedCheck_toggled(button_pressed):
 func _on_AllJems_toggled(button_pressed):
 	if !button_pressed:
 		return
+	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllJems.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
 		curr_lvl.level_all_jems = button_pressed
@@ -68,6 +69,7 @@ func _on_AllJems_toggled(button_pressed):
 func _on_AllBugs_toggled(button_pressed):
 	if !button_pressed:
 		return
+	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllBugs.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
 		curr_lvl.level_all_bug_pieces = button_pressed
@@ -79,6 +81,7 @@ func _on_AllBugs_toggled(button_pressed):
 func _on_Benchmark_toggled(button_pressed): #ToDo: how are benchmarks handled?
 	if !button_pressed:
 		return
+	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/Benchmark.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
 		curr_lvl.level_completed = button_pressed
@@ -90,6 +93,7 @@ func _on_Benchmark_toggled(button_pressed): #ToDo: how are benchmarks handled?
 func _on_FoundGR17_toggled(button_pressed):
 	if !button_pressed:
 		return
+	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/FoundGR17.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
 		curr_lvl.level_found_gr17 = button_pressed

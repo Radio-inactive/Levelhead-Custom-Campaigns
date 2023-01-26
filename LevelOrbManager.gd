@@ -102,7 +102,7 @@ func load_user_campaign_from_json(json):
 	var prev_save = Util.get_file(get_campaign_id(), "SavedCampaigns/Saved/")
 	if prev_save != null && prev_save != "":
 		var buf = JSON.parse(prev_save).result
-		if buf.version >= json.version:
+		if (buf.has("version") and json.has("version")) and buf.version >= json.version:
 			json = buf
 	
 	if "version" in json: version = json.version

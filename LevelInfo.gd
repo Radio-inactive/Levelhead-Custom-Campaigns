@@ -7,8 +7,9 @@ onready var all_jems := $HBoxContainer/VBoxContainer/Checks/AllJems
 onready var found_gr17 := $HBoxContainer/VBoxContainer/Checks/FoundGR17
 onready var all_bugs := $HBoxContainer/VBoxContainer/Checks/AllBugs
 onready var bench := $HBoxContainer/VBoxContainer/Checks/Benchmark
-onready var bookmark_status = $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkStatus
-onready var bookmark_button = $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton
+onready var bookmark_status := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkStatus
+onready var bookmark_button := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton
+onready var clipboard_button := $HBoxContainer/VBoxContainer/TitleBookmark/TextureButton
 
 onready var LevelOrbs := $"../../LevelOrbs"
 
@@ -22,11 +23,17 @@ func update_info_from_level(level : LevelOrb):
 	if level != null:
 		title.text = level.n
 		completed.pressed = level.level_completed
+		completed.disabled = level.level_completed
 		all_jems.pressed = level.level_all_jems
+		all_jems.disabled = level.level_all_jems
 		found_gr17.pressed = level.level_found_gr17
+		found_gr17.disabled = level.level_found_gr17
 		all_bugs.pressed = level.level_all_bug_pieces
+		all_bugs.disabled = level.level_all_bug_pieces
+		#ToDo: add benchmark
+		clipboard_button.pressed = false
 	else:
-		print("oh no")
+		print("no level in update_info_from_level")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -78,4 +85,14 @@ func _on_RumpusRequests_bookmark_set_result(result, response_code, headers, body
 func _on_BookmarkButton_toggled(button_pressed):
 	bookmark_status.text = "LOADING..."
 	bookmark_button.disabled = true
-	emit_signal("current_level_bookmark", SpaceShip.get_current_level().get_level_id(), button_pressed)
+	emit_signal("current_level_bookmark", SpaceShip.current_orb.levelID, button_pressed)
+
+
+func _on_TextureButton_toggled(button_pressed):
+	if button_pressed:
+		if SpaceShip.current_orb != null:
+			OS.clipboard = SpaceShip.current_orb.levelID
+	else:
+		if SpaceShip.current_orb != null:
+			OS.clipboard = SpaceShip.current_orb.levelID
+			clipboard_button.pressed = true
