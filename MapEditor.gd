@@ -27,6 +27,9 @@ func _ready():
 func _on_StartButton_pressed():
 	Connections.make_all_paths()
 	var startPos = LevelOrbs.find_start_orb()
+	if startPos == null:
+		StartUI.hide()
+		return
 	SpaceShip.current_orb = startPos
 	SpaceShip.position = startPos.position
 	SpaceShip.calculate_possible_movement()

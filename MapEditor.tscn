@@ -267,7 +267,6 @@ text = "Start Campaign"
 
 [node name="BaseUI" parent="UI" instance=ExtResource( 16 )]
 visible = false
-HIDE_RETURN_ON_START_FLAG = false
 
 [connection signal="update_ui" from="." to="UI/LevelInfo" method="_on_Node2D_update_ui"]
 [connection signal="bookmark_set_result" from="RumpusRequests" to="UI/LevelInfo" method="_on_RumpusRequests_bookmark_set_result"]
