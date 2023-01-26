@@ -39,7 +39,7 @@ func _on_Return_pressed():
 
 func _ready():
 	if HIDE_RETURN_ON_START_FLAG:
-		show_return()
+		$Return.hide()
 
 
 func _on_Load_pressed():
