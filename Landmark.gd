@@ -61,8 +61,8 @@ func to_dict() -> Dictionary:
 
 func _ready():
 	play(String(elId))
-	x = position.x
-	y = position.y
+	if x == 0: x = position.x
+	if y == 0: y = position.y
 	
 
 func _process(_delta):
