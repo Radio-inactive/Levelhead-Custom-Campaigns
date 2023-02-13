@@ -74,11 +74,15 @@ levelID = "lsdmv1t"
 
 [node name="second_level" parent="LevelOrbs" instance=ExtResource( 2 )]
 position = Vector2( 811, 500 )
+gr18 = 1
+b_time = 30.5
 pre = PoolStringArray( "lsdmv1t" )
 levelID = "0c5267f"
 
 [node name="third_lvl_1" parent="LevelOrbs" instance=ExtResource( 2 )]
 position = Vector2( 1394, 300 )
+ch = 1
+b_time = 30.0
 pre = PoolStringArray( "0c5267f" )
 n = "cool level"
 weather = 1
@@ -97,6 +101,7 @@ levelID = "tzmz046"
 
 [node name="fourth_lvl" parent="LevelOrbs" instance=ExtResource( 2 )]
 position = Vector2( 1350, 807 )
+level_score_bench = 2000
 pre_all = 1
 pre_coin = 1
 pre = PoolStringArray( "wb0lhhs", "tzmz046" )
@@ -127,11 +132,11 @@ margin_right = 1913.0
 margin_bottom = 181.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
-margin_right = 771.0
+margin_right = 1038.0
 margin_bottom = 174.0
 
 [node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
-margin_right = 771.0
+margin_right = 1038.0
 margin_bottom = 93.0
 
 [node name="LevelTitle" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
@@ -165,7 +170,7 @@ margin_bottom = 70.0
 
 [node name="Checks" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
 margin_top = 97.0
-margin_right = 771.0
+margin_right = 1038.0
 margin_bottom = 168.0
 
 [node name="CompletedCheck" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
@@ -204,16 +209,27 @@ custom_icons/unchecked = ExtResource( 12 )
 text = "All Bugs"
 
 [node name="Benchmark" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-visible = false
 margin_left = 775.0
-margin_right = 918.0
+margin_right = 895.0
 margin_bottom = 71.0
+custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked_disabled = ExtResource( 12 )
 custom_icons/unchecked = ExtResource( 12 )
-text = "Bench"
+text = "OTD"
+
+[node name="score_bench" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
+margin_left = 899.0
+margin_right = 1038.0
+margin_bottom = 71.0
+custom_icons/checked_disabled = ExtResource( 11 )
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked_disabled = ExtResource( 12 )
+custom_icons/unchecked = ExtResource( 12 )
+text = "Score"
 
 [node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 775.0
+margin_left = 1042.0
 margin_right = 1616.0
 margin_bottom = 174.0
 size_flags_horizontal = 3
@@ -280,6 +296,7 @@ HIDE_RETURN_ON_START_FLAG = false
 [connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/FoundGR17" to="." method="_on_FoundGR17_toggled"]
 [connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllBugs" to="." method="_on_AllBugs_toggled"]
 [connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/Benchmark" to="." method="_on_Benchmark_toggled"]
+[connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/score_bench" to="." method="_on_score_bench_toggled"]
 [connection signal="pressed" from="UI/LevelInfo/HBoxContainer/SaveButton" to="LevelOrbs" method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="UI/Return" to="." method="_on_Return_pressed"]
 [connection signal="pressed" from="UI/PanelContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

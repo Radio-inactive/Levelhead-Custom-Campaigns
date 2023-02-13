@@ -8,6 +8,7 @@ export(t_types) var t #node type. Level(0) in this case
 export(gr17_present) var ch : int #GR-17 present
 export(bug_pieces_present) var gr18 : int #bug pieces present
 export var b_time : float #on-time delivery
+export var level_score_bench : int #web map only. score benchmark
 export(pre_all_previous_completed) var pre_all : int #requires all previous levels
 export(pre_all_bug_pieces) var pre_gr18 : int #requires all previous bug pieces
 export(pre_coin_all) var pre_coin : int #requires all jems of previous levels
@@ -29,6 +30,8 @@ export var level_completed := false
 export var level_all_jems := false
 export var level_found_gr17 := false
 export var level_all_bug_pieces := false
+export var level_otd_met := false
+export var level_score_bench_met := false
 
 const dictionary_base : Dictionary = \
 {
@@ -36,6 +39,7 @@ const dictionary_base : Dictionary = \
 	"ch":0,
 	"gr18":0,
 	"b_time":0,
+	"level_score_bench":0,
 	"pre_all":0,
 	"pre_gr18":0,
 	"pre_coin":0,
@@ -54,7 +58,9 @@ const dictionary_base : Dictionary = \
 	"level_completed":false,
 	"level_all_jems":false,
 	"level_found_gr17":false,
-	"level_all_bug_pieces":false
+	"level_all_bug_pieces":false,
+	"level_otd_met":false,
+	"level_score_bench_met":false
 }
 
 #not needed in levels:

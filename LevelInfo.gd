@@ -7,6 +7,7 @@ onready var all_jems := $HBoxContainer/VBoxContainer/Checks/AllJems
 onready var found_gr17 := $HBoxContainer/VBoxContainer/Checks/FoundGR17
 onready var all_bugs := $HBoxContainer/VBoxContainer/Checks/AllBugs
 onready var bench := $HBoxContainer/VBoxContainer/Checks/Benchmark
+onready var score := $HBoxContainer/VBoxContainer/Checks/score_bench
 onready var bookmark_status := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkStatus
 onready var bookmark_button := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton
 onready var clipboard_button := $HBoxContainer/VBoxContainer/TitleBookmark/TextureButton
@@ -22,15 +23,36 @@ signal current_level_bookmark(level_code, set)
 func update_info_from_level(level : LevelOrb):
 	if level != null:
 		title.text = level.n
+		
+		bookmark_button.pressed = false
+		bookmark_status.text = ""
+		
 		completed.pressed = level.level_completed
 		completed.disabled = level.level_completed
+		
 		all_jems.pressed = level.level_all_jems
 		all_jems.disabled = level.level_all_jems
+		
+		found_gr17.visible = level.ch == MapEntityGeneric.gr17_present.GR17_PRESENT
 		found_gr17.pressed = level.level_found_gr17
 		found_gr17.disabled = level.level_found_gr17
+		
+		all_bugs.visible = level.gr18 == MapEntityGeneric.bug_pieces_present.BUG_PIECES_PRESENT
 		all_bugs.pressed = level.level_all_bug_pieces
 		all_bugs.disabled = level.level_all_bug_pieces
-		#ToDo: add benchmark
+		
+		bench.visible = level.b_time != 0
+		bench.pressed = level.level_otd_met
+		bench.disabled = level.level_otd_met
+		#todo: time formatting
+		bench.text = "OTD (" + String(level.b_time) + ")"
+		#todo: fix
+		score.visible = level.level_score_bench != 0
+		score.pressed = level.level_score_bench_met
+		score.disabled = level.level_score_bench_met
+		#todo: formatting
+		score.text = "Score (" + String(level.level_score_bench) + ")"
+		
 		clipboard_button.pressed = false
 	else:
 		print("no level in update_info_from_level")

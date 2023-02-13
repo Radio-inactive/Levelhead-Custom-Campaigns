@@ -41,12 +41,11 @@ func _ready():
 	if HIDE_RETURN_ON_START_FLAG:
 		$Return.hide()
 
+# FILE LOADING
 
 func _on_Load_pressed():
 	FileLoad.show()
 	FileLoadMessage.hide()
-
-# FILE LOADING
 
 func _on_Clipboard_pressed():
 	var campaign_clip = JSON.parse(OS.clipboard)

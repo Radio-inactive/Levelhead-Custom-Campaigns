@@ -8,6 +8,7 @@ onready var StartUIText := $UI/PanelContainer/VBoxContainer/Label
 onready var Connections := $Connections
 onready var RumpusReq := $RumpusRequests
 onready var StartMenu := $UI/BaseUI
+onready var LevelInfo := $UI/LevelInfo
 
 signal update_ui(level)
 
@@ -26,6 +27,8 @@ func _ready():
 
 # start button builds all paths
 func _on_StartButton_pressed():
+	if RumpusReq.delegation_key == "NOKEY":
+		LevelInfo.bookmark_button.hide()
 	Connections.make_all_paths()
 	var startPos = LevelOrbs.find_start_orb()
 	if startPos == null:
@@ -88,7 +91,7 @@ func _on_Benchmark_toggled(button_pressed): #ToDo: how are benchmarks handled?
 	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/Benchmark.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		curr_lvl.level_completed = button_pressed
+		curr_lvl.level_otd_met = button_pressed
 		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
@@ -105,6 +108,17 @@ func _on_FoundGR17_toggled(button_pressed):
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
 
+func _on_score_bench_toggled(button_pressed):
+	if !button_pressed:
+		return
+	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/score_bench.disabled = true
+	var curr_lvl = SpaceShip.current_orb
+	if curr_lvl != null:
+		curr_lvl.level_score_bench_met = button_pressed
+		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
+		SpaceShip.calculate_possible_movement()
+		Connections.refresh_all_paths()
+
 ## When a level is selected in the start menu
 
 func _on_BaseUI_load_campaign_from_start_menu(campaign):
@@ -116,3 +130,4 @@ func _on_BaseUI_load_campaign_from_start_menu(campaign):
 func _on_Return_pressed():
 	StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
 	StartMenu.show()
+

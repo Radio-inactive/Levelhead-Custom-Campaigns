@@ -46,6 +46,7 @@ signal bookmark_set_result(result, response_code, headers, body)
 
 func set_bookmark(level_code : String, set : bool):
 	if delegation_key == "NOKEY":
+		emit_signal("bookmark_set_result", 1, null, null, null)
 		return
 	if set:
 		$BookmarkSet.request(RumpusURL.bookmark_url([level_code]),["Rumpus-Delegation-Key:" + delegation_key], true, HTTPClient.METHOD_PUT)

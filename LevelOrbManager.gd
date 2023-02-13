@@ -17,10 +17,10 @@ const user_campaign_base = \
 
 var window = JavaScript.get_interface("window")
 
-var campaignName : String = "NO CAMPAIGN NAME"
-var creatorName : String = "UNKNOWN CREATOR"
-var creatorCode : String = "NO CREATOR CODE"
-var version : int = 1
+export var campaignName : String = "NO CAMPAIGN NAME"
+export var creatorName : String = "UNKNOWN CREATOR"
+export var creatorCode : String = "NO CREATOR CODE"
+export var version : int = 1
 
 func find_start_orb() -> LevelOrb:
 	for level in get_all_level_orbs():
@@ -92,6 +92,19 @@ func save_user_campaign():
 	Util.set_file(get_campaign_id(), JSON.print(dict_out), "SavedCampaigns/Saved/")
 	 
 
+func apply_old_save_to_new_ver(old : Dictionary, new : Dictionary):
+	if "mapNodes" in new and "mapNodes" in old:
+		for new_lvl in new.mapNodes:
+			for old_lvl in old.mapNodes: #todo: maybe check if values exist
+				if old_lvl.levelID == new_lvl.levelID:
+					new_lvl.level_completed = old_lvl.level_completed
+					new_lvl.level_all_jems = old_lvl.level_all_jems
+					new_lvl.level_found_gr17 = old_lvl.level_found_gr17
+					new_lvl.level_all_bug_pieces = old_lvl.level_all_bug_pieces
+					new_lvl.level_otd_met = old_lvl.level_otd_met
+					new_lvl.level_score_bench_met = old_lvl.level_score_bench_met
+	
+
 func load_user_campaign_from_json(json):
 	Util.delete_children(self)
 	Util.delete_children(LandmarkManager)
@@ -102,9 +115,12 @@ func load_user_campaign_from_json(json):
 	var prev_save = Util.get_file(get_campaign_id(), "SavedCampaigns/Saved/")
 	if prev_save != null && prev_save != "":
 		var buf = JSON.parse(prev_save).result
-		if (buf.has("version") and json.has("version")) and buf.version >= json.version:
+		if (buf.has("version") and json.has("version")) and buf.version < json.version:
+			apply_old_save_to_new_ver(buf, json)
+		elif (buf.has("version") and json.has("version")) and buf.version >= json.version:
 			json = buf
 	
+	# building the map
 	if "version" in json: version = json.version
 	# get levels
 	if "mapNodes" in json:
@@ -115,7 +131,7 @@ func load_user_campaign_from_json(json):
 			add_child(new_n)
 	if "landmarks" in json:
 		LandmarkManager.load_landmarks_from_array(json.landmarks)
-
+	
 
 func _on_SaveButton_pressed():
 	save_user_campaign()
