@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://LevelOrb.gd" type="Script" id=1]
 [ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_0.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_basket_0.png" type="Texture" id=19]
 [ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_tundra_3.png" type="Texture" id=20]
 [ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_desert_1.png" type="Texture" id=21]
+[ext_resource path="res://MapObjectPictures/LevelOrbs/sp_levelorb_asteroid_0.png" type="Texture" id=22]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -34,7 +35,7 @@ animations = [ {
 "name": "aquadunes_weather",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 22 ) ],
 "loop": true,
 "name": "asteroid",
 "speed": 0.0
@@ -79,7 +80,7 @@ offset = Vector2( 0, -117 )
 
 [node name="Main" type="AnimatedSprite" parent="OrbModel"]
 frames = SubResource( 2 )
-animation = "maarla"
+animation = "aquadunes"
 
 [node name="Bottom" type="Sprite" parent="OrbModel"]
 texture = ExtResource( 19 )

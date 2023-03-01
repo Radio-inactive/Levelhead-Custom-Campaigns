@@ -33,7 +33,7 @@ func get_level_by_id(levelId : String) -> LevelOrb:
 	for level in get_all_level_orbs():
 		if level.levelID == levelId:
 			return level
-	print_debug("no result in get_level_by_id")
+	print_debug("no result in get_level_by_id. Code: " + String(levelId))
 	return null
 
 #gets all level orbs following the one that belongs to the levelId
@@ -49,11 +49,7 @@ func update_unlocks_after_level(levelId : String) -> void:
 		level.check_unlock()
 
 func get_all_level_orbs() -> Array:
-	var arr_out := []
-	for node in get_children():
-		if ("t" in node) and (node.t == 0): # 0 -> node type is "level"
-			arr_out.append(node)
-	return arr_out
+	return get_children()
 
 ##loading and saving
 

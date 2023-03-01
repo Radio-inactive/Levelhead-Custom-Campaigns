@@ -2,6 +2,7 @@
 extends MapEntityGeneric
 
 onready var Manager := $".."
+onready var OrbModel_all := $OrbModel
 onready var OrbModel := $OrbModel/Main
 
 export(t_types) var t #node type. Level(0) in this case
@@ -15,8 +16,8 @@ export(pre_coin_all) var pre_coin : int #requires all jems of previous levels
 export(pre_chall_all) var pre_chall : int #requires all GR-17s of previous levels
 export var pre : PoolStringArray #list of IDs of previous nodes
 export var n : String = "Level Name"#name of the level
-var x # x-position, set by getting position from godot
-var y # y-position, set by getting position from godot
+var x = 0 # x-position, set by getting position from godot
+var y = 0 # y-position, set by getting position from godot
 export(has_weather) var weather : int #  does level have weather?
 export(on_main_path) var main : int # level is on the main path?
 export(bm_biome) var bm : int # biome of the level
@@ -84,10 +85,14 @@ func instance_from_json(json : Dictionary):
 			if key == "scale":
 				scale = Vector2(json[key], json[key])
 			else:
+				if key == "t" and json.t == t_types.PATH_SHAPE_ASSIST:
+					level_completed = true
 				self[key] = json[key]
+				if key == "level_completed" and self.t == t_types.PATH_SHAPE_ASSIST:
+					level_completed = true
 		else:
 			print("unknown member name: " + key)
-	print(position)
+	
 
 #checks if all unlock conditions are met
 func check_unlock() -> bool:
@@ -129,4 +134,8 @@ func check_unlock() -> bool:
 func _ready():
 	x = global_position.x
 	y = global_position.y
-	OrbModel.play(biome_names[bm] + ("_weather" if weather == 1 else ""))
+	if t == 2:
+		OrbModel_all.hide()
+		return
+	var anim_name = biome_names[bm] + ("_weather" if weather == 1 else "")
+	OrbModel.play(anim_name)

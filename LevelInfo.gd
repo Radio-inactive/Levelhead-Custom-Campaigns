@@ -22,6 +22,17 @@ signal current_level_bookmark(level_code, set)
 
 func update_info_from_level(level : LevelOrb):
 	if level != null:
+		if level.t == level.t_types.PATH_SHAPE_ASSIST:
+			title.text = ""
+			completed.hide()
+			all_jems.hide()
+			found_gr17.hide()
+			all_bugs.hide()
+			bench.hide()
+			score.hide()
+			clipboard_button.hide()
+			return
+		clipboard_button.show()
 		title.text = level.n
 		
 		bookmark_button.pressed = false
@@ -46,7 +57,6 @@ func update_info_from_level(level : LevelOrb):
 		bench.disabled = level.level_otd_met
 		#todo: time formatting
 		bench.text = "OTD (" + String(level.b_time) + ")"
-		#todo: fix
 		score.visible = level.level_score_bench != 0
 		score.pressed = level.level_score_bench_met
 		score.disabled = level.level_score_bench_met
