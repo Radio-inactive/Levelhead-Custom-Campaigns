@@ -1,19 +1,19 @@
-extends AnimatedSprite
+extends AnimatedSprite2D
 
-var x := 0
-var y := 0
-export var xsp := 0
+var x := 0.0
+var y := 0.0
+@export var xsp := 0
 enum lm_type{HUGE_ASTEROID = 0, SMALL_ASTEROID, MEDIUM_ASTEROID, BS_HQ, SQUID,
-			 TERRARIUM, GRAY_PLANET, MASSIVE_CORAL, RED_CONTAINER, GREEN_CONTAINER,
-			 ORANGE_CONTAINER, GRAY_CONTAINER, CORAL_PIECE, LONG_CORAL, WHIRL_CORAL,
-			 WHITE_PLANET, BLUE_PLANET, EYE_PLANET, ASTEROID_PIECE_1, ASTEROID_PIECE_2,
-			 UNUSED_SATURN, UNUSED_SEMIPLANET}
-export(lm_type) var elId := 0 # ID of the landmark graphics
-export var rot := 0 # rotation
-export var dep := 0 # "depth" = parallax
+			TERRARIUM, GRAY_PLANET, MASSIVE_CORAL, RED_CONTAINER, GREEN_CONTAINER,
+			ORANGE_CONTAINER, GRAY_CONTAINER, CORAL_PIECE, LONG_CORAL, WHIRL_CORAL,
+			WHITE_PLANET, BLUE_PLANET, EYE_PLANET, ASTEROID_PIECE_1, ASTEROID_PIECE_2,
+			UNUSED_SATURN, UNUSED_SEMIPLANET}
+@export var elId: lm_type # ID of the landmark graphics
+@export var rot := 0 # rotation
+@export var dep := 0 # "depth" = parallax
 var depthFactor: float = 0 # 0 menas attached to world, 1 means attached to camera
-export var rsp := 0 # rotation speed
-export var sc := 1 # scale
+@export var rsp := 0 # rotation speed
+@export var sc := 1 # scale
 var world_pos := Vector2.ZERO
 var world_scale : = Vector2.ONE
 
@@ -60,29 +60,16 @@ func to_dict() -> Dictionary:
 	return dict_out
 
 func _ready():
-	play(String(elId))
-	if x == 0: x = position.x
-	if y == 0: y = position.y
+	play(str(elId))
+	if x == 0.0: x = position.x
+	if y == 0.0: y = position.y
 	
 
 func _process(_delta):
-	var cam = getCurrentCamera2D()
+	var cam = get_viewport().get_camera_2d()
 	if not cam:
 		return
 	var cam_pos = cam.global_position + world_pos
 	position = lerp(world_pos, cam_pos, depthFactor)
 	var cam_scale = world_scale * cam.zoom
 	scale = lerp(world_scale, cam_scale, depthFactor)
-
-# Godot why
-# It's in 4, and there's a PR to bring it to 3 https://github.com/godotengine/godot/pull/69426
-func getCurrentCamera2D() -> Camera2D:
-	var viewport = get_viewport()
-	if not viewport:
-		return null
-	var camerasGroupName = "__cameras_%d" % viewport.get_viewport_rid().get_id()
-	var cameras = get_tree().get_nodes_in_group(camerasGroupName)
-	for camera in cameras:
-		if camera is Camera2D and camera.current:
-			return camera
-	return null

@@ -1,11 +1,11 @@
 extends Control
 
-onready var CampaignTitle := $VBoxContainer/CampaignTitle/Label
-onready var SavedCampaigns := $VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns
-onready var FileLoad := $FileLoad
-onready var FileLoadMessage := $FileLoad/PanelContainer/VBoxContainer/Message
+@onready var CampaignTitle := $VBoxContainer/CampaignTitle/Label
+@onready var SavedCampaigns := $VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns
+@onready var FileLoad := $FileLoad
+@onready var FileLoadMessage := $FileLoad/PanelContainer/VBoxContainer/Message
 
-export var HIDE_RETURN_ON_START_FLAG := true
+@export var HIDE_RETURN_ON_START_FLAG := true
 
 signal load_campaign_from_start_menu(campaign)
 
@@ -48,9 +48,10 @@ func _on_Load_pressed():
 	FileLoadMessage.hide()
 
 func _on_Clipboard_pressed():
-	var campaign_clip = JSON.parse(OS.clipboard)
-	if campaign_clip.error == OK:
-		campaign_clip = campaign_clip.result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(DisplayServer.clipboard_get())
+	var campaign_clip = test_json_conv.get_data()
+	if campaign_clip:
 		if campaign_clip.has("campaignName") and campaign_clip.has("creatorCode"):
 			emit_signal("load_campaign_from_start_menu", campaign_clip)
 			FileLoad.hide()

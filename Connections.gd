@@ -1,8 +1,8 @@
 ### Manages all connections on the map
 extends Node2D
 
-onready var LevelOrbs := $"../LevelOrbs"
-onready var RumpusReq := $"../RumpusRequests"
+@onready var LevelOrbs := $"../LevelOrbs"
+@onready var RumpusReq := $"../RumpusRequests"
 const LevelConnection := preload("res://LevelConnections.gd")
 
 # creates all paths from scratch.
@@ -12,7 +12,7 @@ func make_all_paths():
 	for level in LevelOrbs.get_all_level_orbs():
 		#instantiate new line for each previous level
 		for prev_level in level.pre:
-			line_buf = preload("res://LevelConnectionLine.tscn").instance()
+			line_buf = preload("res://LevelConnectionLine.tscn").instantiate()
 			line_buf.set_from_level_line(LevelOrbs.get_level_by_id(prev_level), level)
 			add_child(line_buf)
 

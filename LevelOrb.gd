@@ -1,38 +1,38 @@
 ### Level Orb found on the map
 extends MapEntityGeneric
 
-onready var Manager := $".."
-onready var OrbModel_all := $OrbModel
-onready var OrbModel := $OrbModel/Main
+@onready var Manager := $".."
+@onready var OrbModel_all := $OrbModel
+@onready var OrbModel := $OrbModel/Main
 
-export(t_types) var t #node type. Level(0) in this case
-export(gr17_present) var ch : int #GR-17 present
-export(bug_pieces_present) var gr18 : int #bug pieces present
-export var b_time : float #on-time delivery
-export var level_score_bench : int #web map only. score benchmark
-export(pre_all_previous_completed) var pre_all : int #requires all previous levels
-export(pre_all_bug_pieces) var pre_gr18 : int #requires all previous bug pieces
-export(pre_coin_all) var pre_coin : int #requires all jems of previous levels
-export(pre_chall_all) var pre_chall : int #requires all GR-17s of previous levels
-export var pre : PoolStringArray #list of IDs of previous nodes
-export var n : String = "Level Name"#name of the level
+@export var t: t_types #node type. Level(0) in this case
+@export var ch: gr17_present #GR-17 present
+@export var gr18: bug_pieces_present #bug pieces present
+@export var b_time : float #on-time delivery
+@export var level_score_bench : int #web map only. score benchmark
+@export var pre_all: pre_all_previous_completed #requires all previous levels
+@export var pre_gr18: pre_all_bug_pieces #requires all previous bug pieces
+@export var pre_coin: pre_coin_all #requires all jems of previous levels
+@export var pre_chall: pre_chall_all #requires all GR-17s of previous levels
+@export var pre : PackedStringArray #list of IDs of previous nodes
+@export var n : String = "Level Name"#name of the level
 var x = 0 # x-position, set by getting position from godot
 var y = 0 # y-position, set by getting position from godot
-export(has_weather) var weather : int #  does level have weather?
-export(on_main_path) var main : int # level is on the main path?
-export(bm_biome) var bm : int # biome of the level
-export(sc_hidden) var sc : int # Level is hidden before unlock?
-export(scpre_hidden) var scpre : int # previous paths are hidden before unlock?
-export(scpost_hidden) var scpost : int # following paths are hidden before unlock?
+@export var weather: has_weather #  does level have weather?
+@export var main: on_main_path # level is on the main path?
+@export var bm: bm_biome # biome of the level
+@export var sc: sc_hidden # Level is hidden before unlock?
+@export var scpre: scpre_hidden # previous paths are hidden before unlock?
+@export var scpost: scpost_hidden # following paths are hidden before unlock?
 
 #custom variables (not part of standard level node)
-export var levelID : String = "level code"
-export var level_completed := false
-export var level_all_jems := false
-export var level_found_gr17 := false
-export var level_all_bug_pieces := false
-export var level_otd_met := false
-export var level_score_bench_met := false
+@export var levelID : String = "level code"
+@export var level_completed := false
+@export var level_all_jems := false
+@export var level_found_gr17 := false
+@export var level_all_bug_pieces := false
+@export var level_otd_met := false
+@export var level_score_bench_met := false
 
 const dictionary_base : Dictionary = \
 {
@@ -104,9 +104,9 @@ func check_unlock() -> bool:
 		for levelId in pre:
 			var level_buf = Manager.get_level_by_id(levelId)
 			if !level_buf.level_completed ||\
-			   (pre_gr18 == 1 && !level_buf.level_all_bug_pieces) ||\
-			   (pre_coin == 1 && !level_buf.level_all_jems) ||\
-			   (pre_chall == 1 && !level_buf.level_found_gr17) \
+			(pre_gr18 == 1 && !level_buf.level_all_bug_pieces) ||\
+			(pre_coin == 1 && !level_buf.level_all_jems) ||\
+			(pre_chall == 1 && !level_buf.level_found_gr17) \
 			:
 				if sc:
 					hide()
@@ -118,9 +118,9 @@ func check_unlock() -> bool:
 	for levelId in pre:
 		level_buf = Manager.get_level_by_id(levelId)
 		if level_buf.level_completed &&\
-			   ((pre_gr18 == 1 && level_buf.level_all_bug_pieces) || pre_gr18 == 0) &&\
-			   ((pre_coin == 1 && level_buf.level_all_jems) || pre_coin == 0) &&\
-			   ((pre_chall == 1 && level_buf.level_found_gr17) || pre_chall == 0 )\
+			((pre_gr18 == 1 && level_buf.level_all_bug_pieces) || pre_gr18 == 0) &&\
+			((pre_coin == 1 && level_buf.level_all_jems) || pre_coin == 0) &&\
+			((pre_chall == 1 && level_buf.level_found_gr17) || pre_chall == 0 )\
 		:
 			show()
 			return true

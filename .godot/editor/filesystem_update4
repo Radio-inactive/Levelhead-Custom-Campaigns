@@ -1,0 +1,10 @@
+res://default_env.tres
+res://MapEditor.tscn
+res://BigYanoneFont.tres
+res://MediumYanoneFont.tres
+res://SpaceShip.tscn
+res://LevelOrb.tscn
+res://BaseUI.tscn
+res://MapEditor.gd
+res://SpaceShip.gd
+res://Landmark.gd

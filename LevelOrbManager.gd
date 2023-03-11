@@ -1,8 +1,8 @@
 ### Manages Level Orbs
 extends Node2D
 
-onready var connections := $"../Connections"
-onready var LandmarkManager := $"../LandmarkManager"
+@onready var connections := $"../Connections"
+@onready var LandmarkManager := $"../LandmarkManager"
 
 const LevelOrb = preload("LevelOrb.gd")
 const user_campaign_base = \
@@ -15,12 +15,12 @@ const user_campaign_base = \
 "landmarks":[]
 }
 
-var window = JavaScript.get_interface("window")
+var window = JavaScriptBridge.get_interface("window")
 
-export var campaignName : String = "NO CAMPAIGN NAME"
-export var creatorName : String = "UNKNOWN CREATOR"
-export var creatorCode : String = "NO CREATOR CODE"
-export var version : int = 1
+@export var campaignName : String = "NO CAMPAIGN NAME"
+@export var creatorName : String = "UNKNOWN CREATOR"
+@export var creatorCode : String = "NO CREATOR CODE"
+@export var version : int = 1
 
 func find_start_orb() -> LevelOrb:
 	for level in get_all_level_orbs():
@@ -85,8 +85,7 @@ func save_user_campaign():
 	dict_out.mapNodes = get_levels_as_dict_arr()
 	dict_out.landmarks = LandmarkManager.get_landmarks_as_dict_array()
 	
-	Util.set_file(get_campaign_id(), JSON.print(dict_out), "SavedCampaigns/Saved/")
-	 
+	Util.set_file(get_campaign_id(), JSON.stringify(dict_out), "SavedCampaigns/Saved/")
 
 func apply_old_save_to_new_ver(old : Dictionary, new : Dictionary):
 	if "mapNodes" in new and "mapNodes" in old:
@@ -110,7 +109,9 @@ func load_user_campaign_from_json(json):
 	creatorCode = json.creatorCode if "creatorCode" in json else "NO CREATOR CODE"
 	var prev_save = Util.get_file(get_campaign_id(), "SavedCampaigns/Saved/")
 	if prev_save != null && prev_save != "":
-		var buf = JSON.parse(prev_save).result
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(prev_save)
+		var buf = test_json_conv.get_data()
 		if (buf.has("version") and json.has("version")) and buf.version < json.version:
 			apply_old_save_to_new_ver(buf, json)
 		elif (buf.has("version") and json.has("version")) and buf.version >= json.version:
@@ -122,7 +123,7 @@ func load_user_campaign_from_json(json):
 	if "mapNodes" in json:
 		for n in json["mapNodes"]:
 			#todo: add support for other nodes
-			var new_n = preload("res://LevelOrb.tscn").instance()
+			var new_n = preload("res://LevelOrb.tscn").instantiate()
 			new_n.instance_from_json(n)
 			add_child(new_n)
 	if "landmarks" in json:

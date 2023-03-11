@@ -1,7 +1,7 @@
 ## A bunch of utility functions
 extends Node
 
-var window = JavaScript.get_interface("window")
+var window = JavaScriptBridge.get_interface("window")
 
 func apply_dict_to_obj(dict : Dictionary, obj : Object, key : String):
 	if key in obj:
@@ -25,10 +25,9 @@ func set_file(name : String, data : String, folder : String):
 	
 	else:
 		#save in file
-		var file = File.new()
-		file.open(folder + name + ".json", File.WRITE)
+		var file = FileAccess.open(folder + name + ".json", FileAccess.WRITE)
 		file.store_string(data)
-		file.close()
+		file = null
 
 func get_file(name : String, folder : String) -> String:
 	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
@@ -36,21 +35,21 @@ func get_file(name : String, folder : String) -> String:
 		return window.localStorage.getItem(name)
 
 	else:
-		var file = File.new()
-		file.open(folder + name + ".json", File.READ)
+		var file = FileAccess.open(folder + name + ".json", FileAccess.READ)
 		var content = file.get_as_text()
-		file.close()
+		file = null
 		return content
 
 func get_files_that_match_uc(folder : String):
 	var files = []
-	var dir = Directory.new()
-	dir.open(folder)
-	dir.list_dir_begin()
+	var dir = DirAccess.open(folder)
+	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
 		for key in range(0,window.localStorage.length):
 			if window.localStorage.key(key).left(3) == "UC_":
-				var campaign_out = JSON.parse(window.localStorage.getItem(window.localStorage.key(key)))
+				var test_json_conv = JSON.new()
+				test_json_conv.parse(window.localStorage.getItem(window.localStorage.key(key)))
+				var campaign_out = test_json_conv.get_data()
 				if campaign_out.error == OK:
 					files.append(campaign_out.result)
 		return files
@@ -60,13 +59,14 @@ func get_files_that_match_uc(folder : String):
 			break
 		elif file.left(3) == "UC_":
 			print(file)
-			var file_buf = File.new();
+			var file_buf = FileAccess.open(folder + file, FileAccess.READ)
 			var campaign_out
-			file_buf.open(folder + file, File.READ)
-			campaign_out = JSON.parse(file_buf.get_as_text())
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(file_buf.get_as_text())
+			campaign_out = test_json_conv.get_data()
 			file_buf.close()
-			if campaign_out.error == OK:
-				files.append(campaign_out.result)
+			if campaign_out:
+				files.append(campaign_out)
 			else:
 				printerr("Error %d while parsing %s at line %d:" % [campaign_out.error, file, campaign_out.error_line])
 				printerr(campaign_out.error_string)

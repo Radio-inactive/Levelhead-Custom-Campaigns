@@ -6,7 +6,7 @@ var use_beta := false
 # Base class for URL-related classes that fetch levels
 class URLBase:
 	var params : Dictionary
-	var sort_supported : PoolStringArray
+	var sort_supported : PackedStringArray
 	#base URL functions
 	static func bscotch_net(is_api := true) -> String:
 		var url_out := ""
@@ -209,7 +209,7 @@ class MDLevelURL extends URLBase:
 
 ## URL Functions, not necessarily level related
 
-func bookmark_url(level_list : PoolStringArray) -> String:
+func bookmark_url(level_list : PackedStringArray) -> String:
 	var url_out = URLBase.levelhead_api() + "bookmarks/"
 	for level_code in level_list:
 		url_out += level_code + ","

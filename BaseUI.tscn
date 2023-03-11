@@ -1,192 +1,159 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://b1lsmsi1uc7pe"]
 
-[ext_resource path="res://MediumYanoneFont.tres" type="Theme" id=1]
-[ext_resource path="res://BaseUI.gd" type="Script" id=2]
-[ext_resource path="res://CC_logo_small.png" type="Texture" id=3]
-[ext_resource path="res://UI/back_yellow.png" type="Texture" id=4]
-[ext_resource path="res://UI/back_white.png" type="Texture" id=5]
+[ext_resource type="Theme" uid="uid://cvalouqbcle6i" path="res://MediumYanoneFont.tres" id="1"]
+[ext_resource type="Script" path="res://BaseUI.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cf14rpn23nhnb" path="res://CC_logo_small.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dgsj6by1n6he5" path="res://UI/back_yellow.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dd6n8ahlts4ds" path="res://UI/back_white.png" id="5"]
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0509804, 0.0509804, 0.0509804, 1 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.6, 0.6, 0.6, 0.52549 )
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_laoid"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 1)
 
 [node name="BaseUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_laoid")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1920.0
-margin_bottom = 986.0
+layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Logo" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 333.0
-margin_right = 1083.0
-margin_bottom = 986.0
+layout_mode = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/Logo"]
-margin_top = 296.0
-margin_right = 750.0
-margin_bottom = 689.0
-texture = ExtResource( 3 )
+layout_mode = 2
+texture = ExtResource("3")
 
 [node name="Menu" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 1087.0
-margin_right = 1587.0
-margin_bottom = 986.0
+layout_mode = 2
 
 [node name="Campaigns" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Menu"]
-margin_right = 500.0
-margin_bottom = 986.0
+layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 alignment = 1
 
 [node name="WorkshopContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns"]
 visible = false
-margin_right = 500.0
-margin_bottom = 986.0
-rect_min_size = Vector2( 500, 0 )
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
 
 [node name="Title" type="Label" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/WorkshopContainer"]
-margin_right = 500.0
-margin_bottom = 72.0
+layout_mode = 2
 text = "Campaign Workshop"
-align = 1
 
 [node name="WorkshopCampaigns" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/WorkshopContainer"]
-margin_top = 76.0
-margin_right = 500.0
-margin_bottom = 904.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/WorkshopContainer/WorkshopCampaigns"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 493.0
-margin_bottom = 821.0
+layout_mode = 2
 size_flags_vertical = 3
-scroll_horizontal_enabled = false
 
 [node name="Content" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/WorkshopContainer/WorkshopCampaigns/ScrollContainer"]
-margin_right = 486.0
-margin_bottom = 814.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="AddNew" type="Button" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/WorkshopContainer"]
-margin_top = 908.0
-margin_right = 500.0
-margin_bottom = 986.0
+layout_mode = 2
 text = "+"
 
 [node name="SavedLevelsContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns"]
-margin_right = 500.0
-margin_bottom = 986.0
+layout_mode = 2
 
 [node name="Title" type="Label" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
-margin_right = 500.0
-margin_bottom = 72.0
+layout_mode = 2
 text = "Saved Campaigns"
-align = 1
 
 [node name="SavedLevelsContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
-margin_top = 76.0
-margin_right = 500.0
-margin_bottom = 904.0
-rect_min_size = Vector2( 500, 0 )
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Campaigns" type="ItemList" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 493.0
-margin_bottom = 821.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Load" type="Button" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
-margin_top = 908.0
-margin_right = 500.0
-margin_bottom = 986.0
+layout_mode = 2
 text = "LOAD"
 
 [node name="CampaignTitle" type="Panel" parent="VBoxContainer"]
-margin_top = 990.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 0, 90 )
-theme = ExtResource( 1 )
-custom_styles/panel = SubResource( 2 )
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme = ExtResource("1")
 
 [node name="Label" type="Label" parent="VBoxContainer/CampaignTitle"]
-margin_right = 40.0
-margin_bottom = 14.0
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 14.0
 
 [node name="Return" type="TextureButton" parent="."]
-margin_right = 117.0
-margin_bottom = 119.0
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 119.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_hover = ExtResource( 5 )
-texture_disabled = ExtResource( 4 )
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("5")
+texture_hover = ExtResource("5")
+texture_disabled = ExtResource("4")
 
 [node name="FileLoad" type="Control" parent="."]
 visible = false
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="FileLoad"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 3 )
 
 [node name="PanelContainer" type="PanelContainer" parent="FileLoad"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -187.0
-margin_top = -128.0
-margin_right = 187.0
-margin_bottom = 128.0
+offset_left = -187.0
+offset_top = -128.0
+offset_right = 187.0
+offset_bottom = 128.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FileLoad/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 367.0
-margin_bottom = 249.0
-theme = ExtResource( 1 )
+layout_mode = 2
+theme = ExtResource("1")
 
 [node name="Message" type="Label" parent="FileLoad/PanelContainer/VBoxContainer"]
 visible = false
-margin_right = 360.0
-margin_bottom = 72.0
+layout_mode = 2
 
 [node name="Clipboard" type="Button" parent="FileLoad/PanelContainer/VBoxContainer"]
-margin_right = 360.0
-margin_bottom = 78.0
+layout_mode = 2
 text = "Load From Clipboard"
 
 [node name="Close" type="Button" parent="FileLoad/PanelContainer/VBoxContainer"]
-margin_top = 82.0
-margin_right = 360.0
-margin_bottom = 160.0
+layout_mode = 2
 text = "Close"
 
 [connection signal="item_activated" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_activated"]

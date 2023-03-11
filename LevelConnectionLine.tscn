@@ -3,6 +3,6 @@
 [ext_resource path="res://LevelConnections.gd" type="Script" id=1]
 
 [node name="Line2D" type="Line2D"]
-points = PoolVector2Array( 0, 0, 50, 50 )
+points = PackedVector2Array( 0, 0, 50, 50 )
 default_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )

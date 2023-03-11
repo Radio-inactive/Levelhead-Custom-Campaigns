@@ -1,14 +1,14 @@
 ## Parent node of the map
 extends Node2D
 
-onready var LevelOrbs := $LevelOrbs
-onready var SpaceShip := $SpaceShip
-onready var StartUI := $UI/PanelContainer
-onready var StartUIText := $UI/PanelContainer/VBoxContainer/Label
-onready var Connections := $Connections
-onready var RumpusReq := $RumpusRequests
-onready var StartMenu := $UI/BaseUI
-onready var LevelInfo := $UI/LevelInfo
+@onready var LevelOrbs := $LevelOrbs
+@onready var SpaceShip := $SpaceShip
+@onready var StartUI := $UI/PanelContainer
+@onready var StartUIText := $UI/PanelContainer/VBoxContainer/Label
+@onready var Connections := $Connections
+@onready var RumpusReq := $RumpusRequests
+@onready var StartMenu := $UI/BaseUI
+@onready var LevelInfo := $UI/LevelInfo
 
 signal update_ui(level)
 

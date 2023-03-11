@@ -4,9 +4,9 @@ extends Node
 var delegation_key : String = "NOKEY"
 
 # get interfaces from Javascript
-var console = JavaScript.get_interface("console")
-var window = JavaScript.get_interface("window")
-var url_params = JavaScript.get_interface("URLSearchParams")
+var console = JavaScriptBridge.get_interface("console")
+var window = JavaScriptBridge.get_interface("window")
+var url_params = JavaScriptBridge.get_interface("URLSearchParams")
 
 func _ready():
 	# Check if on browser. if so, get delegation key
@@ -14,7 +14,9 @@ func _ready():
 		# gets the delegation key from the local storage of the site it is run on.
 		# on the levelkit.netlify.app site, the delegation key is set in the site settings
 		if window.localStorage.getItem('DelegationKey') != null:
-			var js_user_data = parse_json(window.localStorage.getItem('DelegationKey'))
+			var test_json_conv = JSON.new()
+			test_json_conv.parse(window.localStorage.getItem('DelegationKey'))
+			var js_user_data = test_json_conv.get_data()
 			delegation_key = js_user_data.Key
 			console.log(delegation_key)
 		else:
@@ -29,13 +31,15 @@ func get_level_info(level_code : String):
 	#ToDo: Implement request
 
 func get_user_campaign_from_param():
-	var param = JavaScript.eval("""
+	var param = JavaScriptBridge.eval("""
 	var url_string = window.location;
 	var url = new URL(url_string);
 	url.searchParams.get('userCampaign')
 	""")
 	if param != null:
-		param = parse_json(param)
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(param)
+		param = test_json_conv.get_data()
 		return param
 	else:
 		return null
