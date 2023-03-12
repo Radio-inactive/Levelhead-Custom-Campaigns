@@ -36,15 +36,18 @@ func update_info_from_level(level : LevelOrb):
 			score.hide()
 			clipboard_button.hide()
 			return
+		
 		clipboard_button.show()
 		title.text = level.n
 		
 		bookmark_button.pressed = false
 		bookmark_status.text = ""
 		
+		completed.show()
 		completed.pressed = level.level_completed
 		completed.disabled = level.level_completed
 		
+		all_jems.show()
 		all_jems.pressed = level.level_all_jems
 		all_jems.disabled = level.level_all_jems
 		
@@ -61,6 +64,7 @@ func update_info_from_level(level : LevelOrb):
 		bench.disabled = level.level_otd_met
 		#todo: time formatting
 		bench.text = "OTD (" + String(level.b_time) + ")"
+		
 		score.visible = level.level_score_bench != 0
 		score.pressed = level.level_score_bench_met
 		score.disabled = level.level_score_bench_met
