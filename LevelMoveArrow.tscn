@@ -4,13 +4,10 @@
 
 [node name="LevelMoveArrow" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-offset = Vector2( 100, 0 )
-
 [node name="Button" type="Button" parent="."]
 margin_right = 12.0
 margin_bottom = 20.0
+rect_scale = Vector2( 2, 2 )
 icon = ExtResource( 1 )
 flat = true
 icon_align = 1

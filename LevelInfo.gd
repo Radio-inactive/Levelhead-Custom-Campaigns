@@ -11,6 +11,8 @@ onready var score := $HBoxContainer/VBoxContainer/Checks/score_bench
 onready var bookmark_status := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkStatus
 onready var bookmark_button := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton
 onready var clipboard_button := $HBoxContainer/VBoxContainer/TitleBookmark/TextureButton
+onready var return_button := $"../Return"
+
 
 onready var LevelOrbs := $"../../LevelOrbs"
 
@@ -21,6 +23,8 @@ const LevelOrb := preload("LevelOrb.gd")
 signal current_level_bookmark(level_code, set)
 
 func update_info_from_level(level : LevelOrb):
+	self.show()
+	return_button.show()
 	if level != null:
 		if level.t == level.t_types.PATH_SHAPE_ASSIST:
 			title.text = ""
@@ -71,7 +75,9 @@ func update_info_from_level(level : LevelOrb):
 func _ready():
 	pass # Replace with function body.
 
-
+func _on_move_ship_to(_destination):
+	self.hide()
+	return_button.hide()
 
 
 func _on_SpaceShip_update_ui(level):

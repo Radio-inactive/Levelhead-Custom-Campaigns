@@ -6,6 +6,7 @@ onready var Connections := $"../Connections"
 onready var Collision := $Area2D
 onready var LevelOrbs := $"../LevelOrbs"
 onready var DirectionArrows := $DirectionArrows
+onready var LevelInfo := $"../UI/LevelInfo"
 
 const LevelOrb = preload("LevelOrb.gd")
 
@@ -31,6 +32,9 @@ func calculate_possible_movement():
 			path_buf.set_rotation(get_angle_to(level_buf.position))
 			DirectionArrows.add_child(path_buf)
 			path_buf.connect("move_ship_to", self, "_on_move_ship_to")
+			path_buf.connect("move_ship_to", LevelInfo, "_on_move_ship_to")
+	
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,7 +48,7 @@ func _on_move_ship_to(destination):
 		Util.delete_children(DirectionArrows)
 		var tween = get_node("Tween")
 		tween.interpolate_property(self, "position",
-		position, level.position, 0.5,
+		position, level.position, 0.35,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 		$Sprite.rotation = get_angle_to(level.position)

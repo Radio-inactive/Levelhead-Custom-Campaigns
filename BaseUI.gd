@@ -4,12 +4,14 @@ onready var CampaignTitle := $VBoxContainer/CampaignTitle/Label
 onready var SavedCampaigns := $VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns
 onready var FileLoad := $FileLoad
 onready var FileLoadMessage := $FileLoad/PanelContainer/VBoxContainer/Message
+onready var LoadCampaignButton := $"VBoxContainer/Load Campaign"
 
 export var HIDE_RETURN_ON_START_FLAG := true
 
 signal load_campaign_from_start_menu(campaign)
 
 func load_saved_campaigns(campaigns : Array):
+	LoadCampaignButton.disabled = true
 	SavedCampaigns.clear()
 	for campaign in campaigns:
 		if "creatorName" in campaign:
@@ -24,6 +26,7 @@ func show_return():
 	$Return.show()
 
 func _on_Campaigns_item_selected(index):
+	LoadCampaignButton.disabled = false
 	if "campaignName" in SavedCampaigns.get_item_metadata(index):
 		CampaignTitle.text = SavedCampaigns.get_item_metadata(index).campaignName
 	else:
@@ -60,3 +63,9 @@ func _on_Clipboard_pressed():
 
 func _on_Close_pressed():
 	FileLoad.hide()
+
+
+func _on_Load_Campaign_pressed():
+	var selected_item : int = SavedCampaigns.get_selected_items()[0]
+	emit_signal("load_campaign_from_start_menu", SavedCampaigns.get_item_metadata(selected_item))
+	show_return()

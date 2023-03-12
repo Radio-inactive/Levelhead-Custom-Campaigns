@@ -6,9 +6,10 @@
 [node name="MapArrow" type="Button"]
 anchor_right = 0.02
 anchor_bottom = 0.034
-margin_right = -0.400002
+margin_right = 80.68
 margin_bottom = 0.279999
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 0, 25 )
 action_mode = 0
 text = "                 "
 icon = ExtResource( 1 )

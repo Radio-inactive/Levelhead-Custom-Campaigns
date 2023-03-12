@@ -1,13 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://MediumYanoneFont.tres" type="Theme" id=1]
 [ext_resource path="res://BaseUI.gd" type="Script" id=2]
 [ext_resource path="res://CC_logo_small.png" type="Texture" id=3]
 [ext_resource path="res://UI/back_yellow.png" type="Texture" id=4]
 [ext_resource path="res://UI/back_white.png" type="Texture" id=5]
+[ext_resource path="res://BigYanoneFont.tres" type="Theme" id=6]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0509804, 0.0509804, 0.0509804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0.611765, 0.0392157, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.6, 0.6, 0.6, 0.52549 )
@@ -22,35 +29,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1920.0
-margin_bottom = 986.0
+margin_right = 1366.0
+margin_bottom = 862.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Logo" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 333.0
-margin_right = 1083.0
-margin_bottom = 986.0
+margin_left = 56.0
+margin_right = 806.0
+margin_bottom = 862.0
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/Logo"]
-margin_top = 296.0
+margin_top = 234.0
 margin_right = 750.0
-margin_bottom = 689.0
+margin_bottom = 627.0
 texture = ExtResource( 3 )
 
 [node name="Menu" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 1087.0
-margin_right = 1587.0
-margin_bottom = 986.0
+margin_left = 810.0
+margin_right = 1310.0
+margin_bottom = 862.0
 
 [node name="Campaigns" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Menu"]
 margin_right = 500.0
-margin_bottom = 986.0
+margin_bottom = 862.0
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 alignment = 1
@@ -95,7 +102,7 @@ text = "+"
 
 [node name="SavedLevelsContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns"]
 margin_right = 500.0
-margin_bottom = 986.0
+margin_bottom = 862.0
 
 [node name="Title" type="Label" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
 margin_right = 500.0
@@ -106,7 +113,7 @@ align = 1
 [node name="SavedLevelsContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
 margin_top = 76.0
 margin_right = 500.0
-margin_bottom = 904.0
+margin_bottom = 780.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_vertical = 3
 
@@ -114,20 +121,20 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 493.0
-margin_bottom = 821.0
+margin_bottom = 697.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Load" type="Button" parent="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer"]
-margin_top = 908.0
+margin_top = 784.0
 margin_right = 500.0
-margin_bottom = 986.0
+margin_bottom = 862.0
 text = "LOAD"
 
 [node name="CampaignTitle" type="Panel" parent="VBoxContainer"]
-margin_top = 990.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_top = 866.0
+margin_right = 1366.0
+margin_bottom = 956.0
 rect_min_size = Vector2( 0, 90 )
 theme = ExtResource( 1 )
 custom_styles/panel = SubResource( 2 )
@@ -135,6 +142,16 @@ custom_styles/panel = SubResource( 2 )
 [node name="Label" type="Label" parent="VBoxContainer/CampaignTitle"]
 margin_right = 40.0
 margin_bottom = 14.0
+
+[node name="Load Campaign" type="Button" parent="VBoxContainer"]
+margin_top = 960.0
+margin_right = 1366.0
+margin_bottom = 1080.0
+theme = ExtResource( 6 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+disabled = true
+text = "LOAD CAMPAIGN"
 
 [node name="Return" type="TextureButton" parent="."]
 margin_right = 117.0
@@ -192,6 +209,7 @@ text = "Close"
 [connection signal="item_activated" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="VBoxContainer/Load Campaign" to="." method="_on_Load_Campaign_pressed"]
 [connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]
 [connection signal="pressed" from="FileLoad/PanelContainer/VBoxContainer/Clipboard" to="." method="_on_Clipboard_pressed"]
 [connection signal="pressed" from="FileLoad/PanelContainer/VBoxContainer/Close" to="." method="_on_Close_pressed"]
