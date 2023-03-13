@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://campaign_BG.png" type="Texture" id=1]
 [ext_resource path="res://LevelOrb.tscn" type="PackedScene" id=2]
@@ -30,6 +30,9 @@ font_data = ExtResource( 13 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.152941, 0.152941, 0.152941, 1 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
@@ -107,7 +110,6 @@ levelID = "tzmz046"
 
 [node name="fourth_lvl" parent="LevelOrbs" instance=ExtResource( 2 )]
 position = Vector2( 1350, 807 )
-level_score_bench = 2000
 pre_all = 1
 pre_coin = 1
 pre = PoolStringArray( "wb0lhhs", "tzmz046" )
@@ -122,6 +124,29 @@ levelID = "hmt6wzj"
 [node name="SpaceShip" parent="." instance=ExtResource( 4 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CameraZoom" type="VBoxContainer" parent="UI"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -200.0
+margin_right = 80.0
+margin_bottom = 200.0
+theme = ExtResource( 7 )
+
+[node name="In" type="Button" parent="UI/CameraZoom"]
+margin_right = 80.0
+margin_bottom = 198.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "+"
+
+[node name="Out" type="Button" parent="UI/CameraZoom"]
+margin_top = 202.0
+margin_right = 80.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-"
 
 [node name="LevelInfo" type="PanelContainer" parent="UI"]
 anchor_top = 1.0
@@ -261,28 +286,27 @@ texture_disabled = ExtResource( 19 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1913.0
-margin_bottom = 1073.0
+margin_right = 1366.0
+margin_bottom = 1080.0
 
 [node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer"]
-margin_right = 1906.0
+margin_right = 1366.0
 margin_bottom = 120.0
 theme = ExtResource( 7 )
 text = "Campaign: Test by Radio inactive"
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer/VBoxContainer"]
 margin_top = 124.0
-margin_right = 1906.0
+margin_right = 1366.0
 margin_bottom = 324.0
 custom_constants/margin_top = 200
 
 [node name="StartButton" type="Button" parent="UI/PanelContainer/VBoxContainer"]
 margin_top = 328.0
-margin_right = 1906.0
+margin_right = 1366.0
 margin_bottom = 454.0
 theme = ExtResource( 7 )
 text = "Start Campaign"
@@ -293,6 +317,8 @@ visible = false
 [connection signal="update_ui" from="." to="UI/LevelInfo" method="_on_Node2D_update_ui"]
 [connection signal="bookmark_set_result" from="RumpusRequests" to="UI/LevelInfo" method="_on_RumpusRequests_bookmark_set_result"]
 [connection signal="update_ui" from="SpaceShip" to="UI/LevelInfo" method="_on_SpaceShip_update_ui"]
+[connection signal="pressed" from="UI/CameraZoom/In" to="SpaceShip" method="_on_In_pressed"]
+[connection signal="pressed" from="UI/CameraZoom/Out" to="SpaceShip" method="_on_Out_pressed"]
 [connection signal="current_level_bookmark" from="UI/LevelInfo" to="RumpusRequests" method="_on_LevelInfo_current_level_bookmark"]
 [connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark/TextureButton" to="UI/LevelInfo" method="_on_TextureButton_toggled"]
 [connection signal="toggled" from="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton" to="UI/LevelInfo" method="_on_BookmarkButton_toggled"]

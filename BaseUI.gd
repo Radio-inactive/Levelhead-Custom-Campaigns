@@ -5,6 +5,7 @@ onready var SavedCampaigns := $VBoxContainer/HBoxContainer/Menu/Campaigns/SavedL
 onready var FileLoad := $FileLoad
 onready var FileLoadMessage := $FileLoad/PanelContainer/VBoxContainer/Message
 onready var LoadCampaignButton := $"VBoxContainer/Load Campaign"
+onready var TextFileLoad := $FileLoad/PanelContainer/VBoxContainer/Text
 
 export var HIDE_RETURN_ON_START_FLAG := true
 
@@ -63,9 +64,22 @@ func _on_Clipboard_pressed():
 
 func _on_Close_pressed():
 	FileLoad.hide()
+	TextFileLoad.text = ""
 
 
 func _on_Load_Campaign_pressed():
 	var selected_item : int = SavedCampaigns.get_selected_items()[0]
 	emit_signal("load_campaign_from_start_menu", SavedCampaigns.get_item_metadata(selected_item))
 	show_return()
+
+
+func _on_FromText_pressed():
+	var campaign_clip = JSON.parse(TextFileLoad.text)
+	if campaign_clip.error == OK:
+		campaign_clip = campaign_clip.result
+		if campaign_clip.has("campaignName") and campaign_clip.has("creatorCode"):
+			emit_signal("load_campaign_from_start_menu", campaign_clip)
+			FileLoad.hide()
+	else:
+		FileLoadMessage.text = "LOAD FAILED"
+		FileLoadMessage.show()

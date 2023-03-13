@@ -58,3 +58,15 @@ func _on_Tween_tween_completed(_object, _key):
 	calculate_possible_movement()
 	emit_signal("update_ui", current_orb)
 	$Sprite.rotation = 0
+
+#zoom buttons
+const zoom_step := 0.4
+
+func _on_In_pressed():
+	# i tried my hardest to make cam.zoom.x == zoom_step work but it just wouldn't
+	if cam.zoom.x > 0.5:
+		cam.zoom -= Vector2(zoom_step,zoom_step)
+
+func _on_Out_pressed():
+	if cam.zoom.x < 2.5:
+		cam.zoom += Vector2(zoom_step,zoom_step)
