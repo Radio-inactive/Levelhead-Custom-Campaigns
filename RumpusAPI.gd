@@ -30,9 +30,8 @@ func get_level_info(level_code : String):
 
 func get_user_campaign_from_param():
 	var param = JavaScript.eval("""
-	var url_string = window.location;
-	var url = new URL(url_string);
-	url.searchParams.get('userCampaign')
+	var json_str_escaped = window.location.hash.slice(1);
+	decodeURIComponent(json_str_escaped)
 	""")
 	if param != null:
 		param = parse_json(param)
