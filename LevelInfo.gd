@@ -12,7 +12,7 @@ onready var bookmark_status := $HBoxContainer/VBoxContainer/TitleBookmark/Bookma
 onready var bookmark_button := $HBoxContainer/VBoxContainer/TitleBookmark/BookmarkButton
 onready var clipboard_button := $HBoxContainer/VBoxContainer/TitleBookmark/TextureButton
 onready var return_button := $"../Return"
-
+onready var level_code_label := $HBoxContainer/VBoxContainer/TitleBookmark/LevelCode
 
 onready var LevelOrbs := $"../../LevelOrbs"
 
@@ -22,12 +22,21 @@ const LevelOrb := preload("LevelOrb.gd")
 
 signal current_level_bookmark(level_code, set)
 
+func time_format(time):
+	var seconds = int(time) % 60
+	var minutes = int((int(time) - seconds) / 60)
+	var str_out = ""
+	str_out += "%02d:"%minutes
+	str_out += "%02d"%seconds
+	return str_out
+
 func update_info_from_level(level : LevelOrb):
 	self.show()
 	return_button.show()
 	if level != null:
 		if level.t == level.t_types.PATH_SHAPE_ASSIST:
 			title.text = ""
+			level_code_label.text = ""
 			completed.hide()
 			all_jems.hide()
 			found_gr17.hide()
@@ -39,6 +48,7 @@ func update_info_from_level(level : LevelOrb):
 		
 		clipboard_button.show()
 		title.text = level.n
+		level_code_label.text = " (" + level.levelID + ")"
 		
 		bookmark_button.pressed = false
 		bookmark_status.text = ""
@@ -63,7 +73,7 @@ func update_info_from_level(level : LevelOrb):
 		bench.pressed = level.level_otd_met
 		bench.disabled = level.level_otd_met
 		#todo: time formatting
-		bench.text = "OTD (" + String(level.b_time) + ")"
+		bench.text = "O.T.D. (" + time_format(level.b_time) + ")"
 		
 		score.visible = level.level_score_bench != 0
 		score.pressed = level.level_score_bench_met
@@ -117,7 +127,8 @@ func _on_Node2D_set_toggle_ui_switch(node_name, to):
 
 
 func _on_RumpusRequests_bookmark_set_result(result, response_code, headers, body):
-	if result == 0:
+	print(result)
+	if result == HTTPRequest.RESULT_NO_RESPONSE:
 		bookmark_status.text = "SUCCESS"
 	else:
 		bookmark_status.text = "FAILURE"

@@ -19,7 +19,7 @@ func load_saved_campaigns(campaigns : Array):
 	SavedCampaigns.clear()
 	for campaign in campaigns:
 		if "creatorName" in campaign:
-			SavedCampaigns.add_item(campaign.creatorName)
+			SavedCampaigns.add_item(campaign.campaignName)
 			SavedCampaigns.set_item_metadata(SavedCampaigns.get_item_count()-1, campaign)
 		else:
 			SavedCampaigns.add_item("Unknown Creator")
@@ -32,7 +32,7 @@ func show_return():
 func _on_Campaigns_item_selected(index):
 	LoadCampaignButton.disabled = false
 	if "campaignName" in SavedCampaigns.get_item_metadata(index):
-		CampaignTitle.text = SavedCampaigns.get_item_metadata(index).campaignName
+		CampaignTitle.text = SavedCampaigns.get_item_metadata(index).campaignName + " by " + SavedCampaigns.get_item_metadata(index).creatorName
 	else:
 		CampaignTitle.text = "No Title."
 	
