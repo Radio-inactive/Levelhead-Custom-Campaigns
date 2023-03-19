@@ -39,26 +39,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1366.0
+margin_right = 1360.0
 margin_bottom = 862.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Logo" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 56.0
-margin_right = 806.0
+margin_left = 53.0
+margin_right = 803.0
 margin_bottom = 862.0
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/Logo"]
-margin_top = 234.0
+margin_top = 169.0
 margin_right = 750.0
-margin_bottom = 627.0
+margin_bottom = 562.0
 texture = ExtResource( 3 )
 
+[node name="LoadLHCC" type="Button" parent="VBoxContainer/HBoxContainer/Logo"]
+margin_top = 566.0
+margin_right = 750.0
+margin_bottom = 692.0
+theme = ExtResource( 6 )
+text = "Play the LHCC!"
+
 [node name="Menu" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 810.0
-margin_right = 1310.0
+margin_left = 807.0
+margin_right = 1307.0
 margin_bottom = 862.0
 
 [node name="Campaigns" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Menu"]
@@ -139,7 +146,7 @@ text = "ADD CAMPAIGN"
 
 [node name="CampaignTitle" type="Panel" parent="VBoxContainer"]
 margin_top = 866.0
-margin_right = 1366.0
+margin_right = 1360.0
 margin_bottom = 956.0
 rect_min_size = Vector2( 0, 90 )
 theme = ExtResource( 1 )
@@ -151,7 +158,7 @@ margin_bottom = 14.0
 
 [node name="Load Campaign" type="Button" parent="VBoxContainer"]
 margin_top = 960.0
-margin_right = 1366.0
+margin_right = 1360.0
 margin_bottom = 1080.0
 theme = ExtResource( 6 )
 custom_styles/hover = SubResource( 6 )
@@ -237,6 +244,7 @@ margin_bottom = 486.0
 size_flags_vertical = 11
 text = "Close"
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Logo/LoadLHCC" to="." method="_on_LoadLHCC_pressed"]
 [connection signal="item_activated" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/SavedLevelsContainer/Campaigns" to="." method="_on_Campaigns_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Menu/Campaigns/SavedLevelsContainer/Load" to="." method="_on_Load_pressed"]

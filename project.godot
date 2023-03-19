@@ -32,7 +32,7 @@ Util="*res://Util.gd"
 
 [display]
 
-window/size/width=1366
+window/size/width=1360
 window/size/height=1080
 window/size/test_width=960
 window/size/test_height=540

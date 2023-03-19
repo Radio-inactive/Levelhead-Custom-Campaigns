@@ -55,6 +55,7 @@ const dictionary_base : Dictionary = \
 	"sc":0,
 	"scpre":0,
 	"scpost":0,
+	"scale":0,
 	"levelID":"std",
 	"level_completed":false,
 	"level_all_jems":false,
@@ -72,7 +73,10 @@ const dictionary_base : Dictionary = \
 func to_dictionary() -> Dictionary:
 	var dict_out := dictionary_base.duplicate(true)
 	for key in dict_out.keys():
-		dict_out[key] = self[key]
+		if key == "scale":
+			dict_out[key] = scale.x
+		else:
+			dict_out[key] = self[key]
 	return dict_out
 
 func is_first_level():

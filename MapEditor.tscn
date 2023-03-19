@@ -157,42 +157,42 @@ custom_styles/panel = SubResource( 4 )
 script = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/LevelInfo"]
-margin_right = 1366.0
+margin_right = 1360.0
 margin_bottom = 188.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
-margin_right = 1062.0
+margin_right = 1021.0
 margin_bottom = 188.0
 
 [node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
-margin_right = 1062.0
+margin_right = 1021.0
 margin_bottom = 93.0
 
 [node name="LevelTitle" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
 margin_top = 22.0
-margin_right = 294.0
+margin_right = 318.0
 margin_bottom = 70.0
-text = "LEVEL NAME PLACEHOLDER"
+text = "LEVEL NAME PLACEHOLDER..."
 
 [node name="LevelCode" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
-margin_left = 298.0
+margin_left = 322.0
 margin_top = 22.0
-margin_right = 408.0
+margin_right = 432.0
 margin_bottom = 70.0
 custom_colors/font_color = Color( 0, 0.952941, 1, 1 )
 text = " (PLCHLD)"
 
 [node name="TextureButton" type="TextureButton" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
-margin_left = 412.0
-margin_right = 503.0
+margin_left = 436.0
+margin_right = 527.0
 margin_bottom = 93.0
 toggle_mode = true
 texture_normal = ExtResource( 23 )
 texture_pressed = ExtResource( 22 )
 
 [node name="BookmarkButton" type="TextureButton" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
-margin_left = 507.0
-margin_right = 598.0
+margin_left = 531.0
+margin_right = 622.0
 margin_bottom = 93.0
 toggle_mode = true
 texture_normal = ExtResource( 8 )
@@ -200,27 +200,27 @@ texture_pressed = ExtResource( 9 )
 texture_disabled = ExtResource( 15 )
 
 [node name="BookmarkStatus" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
-margin_left = 602.0
+margin_left = 626.0
 margin_top = 22.0
-margin_right = 602.0
+margin_right = 626.0
 margin_bottom = 70.0
 
 [node name="Checks" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
 margin_top = 97.0
-margin_right = 1062.0
+margin_right = 1021.0
 margin_bottom = 168.0
 
 [node name="CompletedCheck" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_right = 197.0
+margin_right = 156.0
 margin_bottom = 71.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
 custom_icons/unchecked = ExtResource( 12 )
-text = "Completed"
+text = "Beaten"
 
 [node name="AllJems" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 201.0
-margin_right = 373.0
+margin_left = 160.0
+margin_right = 332.0
 margin_bottom = 71.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
@@ -228,8 +228,8 @@ custom_icons/unchecked = ExtResource( 12 )
 text = "All Jems"
 
 [node name="FoundGR17" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 377.0
-margin_right = 599.0
+margin_left = 336.0
+margin_right = 558.0
 margin_bottom = 71.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
@@ -237,8 +237,8 @@ custom_icons/unchecked = ExtResource( 12 )
 text = "Found GR-17"
 
 [node name="AllBugs" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 603.0
-margin_right = 771.0
+margin_left = 562.0
+margin_right = 730.0
 margin_bottom = 71.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
@@ -246,8 +246,8 @@ custom_icons/unchecked = ExtResource( 12 )
 text = "All Bugs"
 
 [node name="Benchmark" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 775.0
-margin_right = 919.0
+margin_left = 734.0
+margin_right = 878.0
 margin_bottom = 71.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
@@ -256,8 +256,8 @@ custom_icons/unchecked = ExtResource( 12 )
 text = "O.T.D."
 
 [node name="score_bench" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 923.0
-margin_right = 1062.0
+margin_left = 882.0
+margin_right = 1021.0
 margin_bottom = 71.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
@@ -266,14 +266,14 @@ custom_icons/unchecked = ExtResource( 12 )
 text = "Score"
 
 [node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 1066.0
-margin_right = 1076.0
+margin_left = 1025.0
+margin_right = 1070.0
 margin_bottom = 188.0
 size_flags_horizontal = 3
 
 [node name="SaveButton" type="Button" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 1080.0
-margin_right = 1366.0
+margin_left = 1074.0
+margin_right = 1360.0
 margin_bottom = 188.0
 text = "SAVE PROGRESS"
 icon = ExtResource( 17 )
