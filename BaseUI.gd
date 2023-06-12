@@ -139,6 +139,7 @@ const lhcc : Dictionary = {
 	"creatorCode": "mlf95t",
 	"campaignName": "Community Campaign",
 	"is_lhcc":true,
+	"shipStartPosition":"",
 	"mapNodes": [
 		{
 			"main": 0,

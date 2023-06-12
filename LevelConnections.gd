@@ -22,7 +22,10 @@ func update_path(from_node : LevelOrb, to_node : LevelOrb):
 	if !(from_node.check_unlock() && to_node.check_unlock()):
 		if from_node.scpost || to_node.scpre:
 			hide()
-		default_color = Color.red
+		if to_node.pre_all:
+			default_color = Color.purple
+		else:
+			default_color = Color.red
 	else:
 		show()
 		default_color = Color.white

@@ -124,27 +124,25 @@ levelID = "hmt6wzj"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="CameraZoom" type="VBoxContainer" parent="UI"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -200.0
-margin_right = 80.0
-margin_bottom = 200.0
+[node name="CameraZoom" type="HBoxContainer" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -316.0
+margin_right = 407.0
+margin_bottom = -190.0
 theme = ExtResource( 7 )
 
 [node name="In" type="Button" parent="UI/CameraZoom"]
-margin_right = 80.0
-margin_bottom = 198.0
+margin_right = 201.0
+margin_bottom = 126.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 text = "+"
 
 [node name="Out" type="Button" parent="UI/CameraZoom"]
-margin_top = 202.0
-margin_right = 80.0
-margin_bottom = 400.0
+margin_left = 205.0
+margin_right = 407.0
+margin_bottom = 126.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 text = "-"
 
 [node name="LevelInfo" type="PanelContainer" parent="UI"]
@@ -157,7 +155,7 @@ custom_styles/panel = SubResource( 4 )
 script = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/LevelInfo"]
-margin_right = 1360.0
+margin_right = 1315.0
 margin_bottom = 188.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
@@ -267,13 +265,13 @@ text = "Score"
 
 [node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
 margin_left = 1025.0
-margin_right = 1070.0
+margin_right = 1025.0
 margin_bottom = 188.0
 size_flags_horizontal = 3
 
 [node name="SaveButton" type="Button" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 1074.0
-margin_right = 1360.0
+margin_left = 1029.0
+margin_right = 1315.0
 margin_bottom = 188.0
 text = "SAVE PROGRESS"
 icon = ExtResource( 17 )
@@ -318,7 +316,6 @@ theme = ExtResource( 7 )
 text = "Start Campaign"
 
 [node name="BaseUI" parent="UI" instance=ExtResource( 16 )]
-visible = false
 
 [connection signal="update_ui" from="." to="UI/LevelInfo" method="_on_Node2D_update_ui"]
 [connection signal="bookmark_set_result" from="RumpusRequests" to="UI/LevelInfo" method="_on_RumpusRequests_bookmark_set_result"]

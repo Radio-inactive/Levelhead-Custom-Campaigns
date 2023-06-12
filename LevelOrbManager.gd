@@ -3,6 +3,7 @@ extends Node2D
 
 onready var connections := $"../Connections"
 onready var LandmarkManager := $"../LandmarkManager"
+onready var Ship := $"../SpaceShip"
 
 const LevelOrb = preload("LevelOrb.gd")
 const user_campaign_base = \
@@ -12,7 +13,8 @@ const user_campaign_base = \
 "campaignName":"campaign_test",
 "version":1,
 "mapNodes":[],
-"landmarks":[]
+"landmarks":[],
+"shipStartPosition":""
 }
 
 var window = JavaScript.get_interface("window")
@@ -22,8 +24,13 @@ export var creatorName : String = "UNKNOWN CREATOR"
 export var creatorCode : String = "NO CREATOR CODE"
 export var is_lhcc : bool = false
 export var version : int = 1
+export var ship_start_pos : String = ""
 
 func find_start_orb() -> LevelOrb:
+	if ship_start_pos != "":
+		var from_start_pos = get_level_by_id(ship_start_pos)
+		if from_start_pos != null:
+			return from_start_pos
 	for level in get_all_level_orbs():
 		if(level.is_first_level()):
 			return level
@@ -85,10 +92,11 @@ func save_user_campaign(type : String = "UC_"):
 	dict_out.version = version
 	dict_out.mapNodes = get_levels_as_dict_arr()
 	dict_out.landmarks = LandmarkManager.get_landmarks_as_dict_array()
+	dict_out.shipStartPosition = Ship.current_orb.levelID if Ship.current_orb != null else ""
 	if is_lhcc: type = "LHCC_"
 	
 	Util.set_file(get_campaign_id(type), JSON.print(dict_out), "SavedCampaigns/Saved/")
-	 
+	
 
 func apply_old_save_to_new_ver(old : Dictionary, new : Dictionary):
 	if "mapNodes" in new and "mapNodes" in old:
@@ -120,6 +128,7 @@ func load_user_campaign_from_json(json, type : String = "UC_"):
 			apply_old_save_to_new_ver(buf, json)
 		elif (buf.has("version") and json.has("version")) and buf.version >= json.version:
 			json = buf
+		ship_start_pos = json.shipStartPosition if ("shipStartPosition" in json) and (json.shipStartPosition != "") else ""
 	
 	# building the map
 	if "version" in json: version = json.version
