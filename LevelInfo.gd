@@ -73,7 +73,7 @@ func update_info_from_level(level : LevelOrb):
 		bench.pressed = level.level_otd_met
 		bench.disabled = level.level_otd_met
 		#todo: time formatting
-		bench.text = "O.T.D. (" + time_format(level.b_time) + ")"
+		bench.text = time_format(level.b_time)
 		
 		score.visible = level.level_score_bench != 0
 		score.pressed = level.level_score_bench_met

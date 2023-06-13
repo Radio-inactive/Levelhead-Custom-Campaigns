@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://campaign_BG.png" type="Texture" id=1]
 [ext_resource path="res://LevelOrb.tscn" type="PackedScene" id=2]
@@ -10,8 +10,8 @@
 [ext_resource path="res://UI/bookmark_off.png" type="Texture" id=8]
 [ext_resource path="res://UI/bookmark_on.png" type="Texture" id=9]
 [ext_resource path="res://LevelInfo.gd" type="Script" id=10]
-[ext_resource path="res://check_yes.png" type="Texture" id=11]
-[ext_resource path="res://check_no.png" type="Texture" id=12]
+[ext_resource path="res://UI/complete_yes.png" type="Texture" id=11]
+[ext_resource path="res://UI/score_yes.png" type="Texture" id=12]
 [ext_resource path="res://YanoneKaffeesatz-Bold.otf" type="DynamicFontData" id=13]
 [ext_resource path="res://RumpusRequests.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/bookmark_disabled.png" type="Texture" id=15]
@@ -23,6 +23,16 @@
 [ext_resource path="res://Landmark.tscn" type="PackedScene" id=21]
 [ext_resource path="res://UI/copy_active.png" type="Texture" id=22]
 [ext_resource path="res://UI/copy_inactive.png" type="Texture" id=23]
+[ext_resource path="res://UI/score_no.png" type="Texture" id=24]
+[ext_resource path="res://UI/bugs_yes.png" type="Texture" id=25]
+[ext_resource path="res://UI/otd_no.png" type="Texture" id=26]
+[ext_resource path="res://UI/jems_yes.png" type="Texture" id=27]
+[ext_resource path="res://UI/gr17_yes.png" type="Texture" id=28]
+[ext_resource path="res://UI/complete_no.png" type="Texture" id=29]
+[ext_resource path="res://UI/jems_no.png" type="Texture" id=30]
+[ext_resource path="res://UI/bugs_no.png" type="Texture" id=31]
+[ext_resource path="res://UI/otd_yes.png" type="Texture" id=32]
+[ext_resource path="res://UI/gr17_no.png" type="Texture" id=33]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -127,9 +137,9 @@ levelID = "hmt6wzj"
 [node name="CameraZoom" type="HBoxContainer" parent="UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -316.0
+margin_top = -332.0
 margin_right = 407.0
-margin_bottom = -190.0
+margin_bottom = -206.0
 theme = ExtResource( 7 )
 
 [node name="In" type="Button" parent="UI/CameraZoom"]
@@ -149,21 +159,22 @@ text = "-"
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -188.0
+margin_top = -205.0
 theme = SubResource( 2 )
 custom_styles/panel = SubResource( 4 )
 script = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/LevelInfo"]
-margin_right = 1315.0
-margin_bottom = 188.0
+margin_right = 962.0
+margin_bottom = 205.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
-margin_right = 1021.0
-margin_bottom = 188.0
+margin_right = 668.0
+margin_bottom = 205.0
+size_flags_horizontal = 3
 
 [node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
-margin_right = 1021.0
+margin_right = 668.0
 margin_bottom = 93.0
 
 [node name="LevelTitle" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
@@ -205,74 +216,66 @@ margin_bottom = 70.0
 
 [node name="Checks" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
 margin_top = 97.0
-margin_right = 1021.0
-margin_bottom = 168.0
+margin_right = 668.0
+margin_bottom = 205.0
 
 [node name="CompletedCheck" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_right = 156.0
-margin_bottom = 71.0
+margin_right = 108.0
+margin_bottom = 108.0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "Beaten"
+custom_icons/unchecked = ExtResource( 29 )
 
 [node name="AllJems" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 160.0
-margin_right = 332.0
-margin_bottom = 71.0
-custom_icons/checked_disabled = ExtResource( 11 )
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "All Jems"
+margin_left = 112.0
+margin_right = 220.0
+margin_bottom = 108.0
+custom_icons/checked_disabled = ExtResource( 27 )
+custom_icons/checked = ExtResource( 27 )
+custom_icons/unchecked = ExtResource( 30 )
 
 [node name="FoundGR17" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 336.0
-margin_right = 558.0
-margin_bottom = 71.0
-custom_icons/checked_disabled = ExtResource( 11 )
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "Found GR-17"
+margin_left = 224.0
+margin_right = 332.0
+margin_bottom = 108.0
+custom_icons/checked_disabled = ExtResource( 28 )
+custom_icons/checked = ExtResource( 28 )
+custom_icons/unchecked = ExtResource( 33 )
 
 [node name="AllBugs" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 562.0
-margin_right = 730.0
-margin_bottom = 71.0
-custom_icons/checked_disabled = ExtResource( 11 )
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "All Bugs"
+margin_left = 336.0
+margin_right = 444.0
+margin_bottom = 108.0
+custom_icons/checked_disabled = ExtResource( 25 )
+custom_icons/checked = ExtResource( 25 )
+custom_icons/unchecked = ExtResource( 31 )
 
 [node name="Benchmark" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 734.0
-margin_right = 878.0
-margin_bottom = 71.0
-custom_icons/checked_disabled = ExtResource( 11 )
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked_disabled = ExtResource( 12 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "O.T.D."
+margin_left = 448.0
+margin_right = 556.0
+margin_bottom = 108.0
+custom_icons/checked_disabled = ExtResource( 32 )
+custom_icons/checked = ExtResource( 32 )
+custom_icons/unchecked = ExtResource( 26 )
 
 [node name="score_bench" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 882.0
-margin_right = 1021.0
-margin_bottom = 71.0
-custom_icons/checked_disabled = ExtResource( 11 )
-custom_icons/checked = ExtResource( 11 )
-custom_icons/unchecked_disabled = ExtResource( 12 )
-custom_icons/unchecked = ExtResource( 12 )
-text = "Score"
+margin_left = 560.0
+margin_right = 668.0
+margin_bottom = 108.0
+custom_icons/checked_disabled = ExtResource( 12 )
+custom_icons/checked = ExtResource( 12 )
+custom_icons/unchecked = ExtResource( 24 )
 
 [node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 1025.0
-margin_right = 1025.0
-margin_bottom = 188.0
+margin_left = 672.0
+margin_right = 672.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 
 [node name="SaveButton" type="Button" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 1029.0
-margin_right = 1315.0
-margin_bottom = 188.0
+margin_left = 676.0
+margin_right = 962.0
+margin_bottom = 205.0
 text = "SAVE PROGRESS"
 icon = ExtResource( 17 )
 
@@ -316,6 +319,7 @@ theme = ExtResource( 7 )
 text = "Start Campaign"
 
 [node name="BaseUI" parent="UI" instance=ExtResource( 16 )]
+visible = false
 
 [connection signal="update_ui" from="." to="UI/LevelInfo" method="_on_Node2D_update_ui"]
 [connection signal="bookmark_set_result" from="RumpusRequests" to="UI/LevelInfo" method="_on_RumpusRequests_bookmark_set_result"]
