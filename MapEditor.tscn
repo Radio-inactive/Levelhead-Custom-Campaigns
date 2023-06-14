@@ -165,16 +165,15 @@ custom_styles/panel = SubResource( 4 )
 script = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/LevelInfo"]
-margin_right = 962.0
+margin_right = 920.0
 margin_bottom = 205.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
-margin_right = 668.0
+margin_right = 626.0
 margin_bottom = 205.0
-size_flags_horizontal = 3
 
 [node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
-margin_right = 668.0
+margin_right = 626.0
 margin_bottom = 93.0
 
 [node name="LevelTitle" type="Label" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/TitleBookmark"]
@@ -216,65 +215,75 @@ margin_bottom = 70.0
 
 [node name="Checks" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
 margin_top = 97.0
-margin_right = 668.0
+margin_right = 626.0
 margin_bottom = 205.0
 
 [node name="CompletedCheck" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_right = 108.0
+margin_right = 99.0
 margin_bottom = 108.0
+focus_mode = 0
 custom_icons/checked_disabled = ExtResource( 11 )
 custom_icons/checked = ExtResource( 11 )
 custom_icons/unchecked = ExtResource( 29 )
+enabled_focus_mode = 0
 
 [node name="AllJems" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 112.0
-margin_right = 220.0
+margin_left = 103.0
+margin_right = 202.0
 margin_bottom = 108.0
+focus_mode = 0
 custom_icons/checked_disabled = ExtResource( 27 )
 custom_icons/checked = ExtResource( 27 )
 custom_icons/unchecked = ExtResource( 30 )
+enabled_focus_mode = 0
 
 [node name="FoundGR17" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 224.0
-margin_right = 332.0
+margin_left = 206.0
+margin_right = 305.0
 margin_bottom = 108.0
+focus_mode = 0
 custom_icons/checked_disabled = ExtResource( 28 )
 custom_icons/checked = ExtResource( 28 )
 custom_icons/unchecked = ExtResource( 33 )
+enabled_focus_mode = 0
 
 [node name="AllBugs" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 336.0
-margin_right = 444.0
+margin_left = 309.0
+margin_right = 408.0
 margin_bottom = 108.0
+focus_mode = 0
 custom_icons/checked_disabled = ExtResource( 25 )
 custom_icons/checked = ExtResource( 25 )
 custom_icons/unchecked = ExtResource( 31 )
+enabled_focus_mode = 0
 
 [node name="Benchmark" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 448.0
-margin_right = 556.0
+margin_left = 412.0
+margin_right = 511.0
 margin_bottom = 108.0
+focus_mode = 0
 custom_icons/checked_disabled = ExtResource( 32 )
 custom_icons/checked = ExtResource( 32 )
 custom_icons/unchecked = ExtResource( 26 )
+enabled_focus_mode = 0
 
 [node name="score_bench" type="CheckBox" parent="UI/LevelInfo/HBoxContainer/VBoxContainer/Checks"]
-margin_left = 560.0
-margin_right = 668.0
+margin_left = 515.0
+margin_right = 623.0
 margin_bottom = 108.0
 custom_icons/checked_disabled = ExtResource( 12 )
 custom_icons/checked = ExtResource( 12 )
 custom_icons/unchecked = ExtResource( 24 )
 
 [node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 672.0
-margin_right = 672.0
+margin_left = 630.0
+margin_right = 630.0
 margin_bottom = 205.0
 size_flags_horizontal = 3
 
 [node name="SaveButton" type="Button" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 676.0
-margin_right = 962.0
+margin_left = 634.0
+margin_right = 920.0
 margin_bottom = 205.0
 text = "SAVE PROGRESS"
 icon = ExtResource( 17 )
