@@ -132,6 +132,33 @@ func check_unlock() -> bool:
 		hide()
 	return false
 
+func updateStats(campStats):
+	if ch == gr17_present.GR17_PRESENT:
+		campStats.gr17_total += 1
+		if level_found_gr17:
+			campStats.gr17_got += 1
+
+	if gr18 == bug_pieces_present.BUG_PIECES_PRESENT:
+		campStats.bug_total += 1
+		if level_all_bug_pieces:
+			campStats.bug_got += 1
+
+	if b_time != 0.0:
+		campStats.otd_total += 1
+		if level_otd_met:
+			campStats.otd_got += 1
+	
+	if level_score_bench != 0:
+		campStats.score_total += 1
+		if level_score_bench_met == true:
+			campStats.score_got += 1
+	campStats.jem_total += 1
+	if level_all_jems == true:
+		campStats.jem_got += 1
+	
+	campStats.completed_total += 1
+	if level_completed:
+		campStats.completed_got += 1
 
 
 # Called when the node enters the scene tree for the first time.

@@ -26,6 +26,26 @@ export var is_lhcc : bool = false
 export var version : int = 1
 export var ship_start_pos : String = ""
 
+class CampStats:
+	var completed_total := 0;
+	var completed_got := 0;
+	var jem_total := 0;
+	var jem_got := 0;
+	var gr17_total := 0;
+	var gr17_got := 0;
+	var otd_total := 0;
+	var otd_got := 0;
+	var bug_total := 0;
+	var bug_got := 0;
+	var score_total := 0;
+	var score_got := 0;
+	
+	func get_completion_percentage():
+		var progress_total := completed_total + jem_total + gr17_total + otd_total + bug_total + score_total
+		var progress_got := completed_got + jem_got + gr17_got + otd_got + bug_got + score_got
+		
+		return (float(progress_got) / progress_total) * 100
+
 func find_start_orb() -> LevelOrb:
 	if ship_start_pos != "":
 		var from_start_pos = get_level_by_id(ship_start_pos)
@@ -55,6 +75,12 @@ func get_following_orbs(levelId : String) -> Array:
 func update_unlocks_after_level(levelId : String) -> void:
 	for level in get_following_orbs(levelId):
 		level.check_unlock()
+
+func update_statistics():
+	var stats : CampStats = CampStats.new()
+	for level in get_children():
+		level.updateStats(stats)
+	return stats
 
 func get_all_level_orbs() -> Array:
 	return get_children()
@@ -143,5 +169,21 @@ func load_user_campaign_from_json(json, type : String = "UC_"):
 		LandmarkManager.load_landmarks_from_array(json.landmarks)
 	
 
+func set_current_saved(saved : bool):
+	if window != null:
+		JavaScript.eval("current_campaign_saved = " + ("true" if saved else "false"))
+
+func _ready():
+	if window != null:
+		JavaScript.eval("""const beforeUnloadListener = (event) => {
+if(current_campaign_saved) return null;
+  event.preventDefault();
+  return (event.returnValue = "");
+};
+current_campaign_saved = true;
+addEventListener("beforeunload", beforeUnloadListener, { capture: true });""")
+
+
 func _on_SaveButton_pressed():
 	save_user_campaign()
+	set_current_saved(true)

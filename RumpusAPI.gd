@@ -8,8 +8,8 @@ var console = JavaScript.get_interface("console")
 var window = JavaScript.get_interface("window")
 var url_params = JavaScript.get_interface("URLSearchParams")
 
-func _ready():
-	# Check if on browser. if so, get delegation key
+func get_delegation_key():
+		# Check if on browser. if so, get delegation key
 	if OS.has_feature("HTML5") and OS.has_feature("JavaScript"):
 		# gets the delegation key from the local storage of the site it is run on.
 		# on the levelkit.netlify.app site, the delegation key is set in the site settings
@@ -17,11 +17,13 @@ func _ready():
 			var js_user_data = parse_json(window.localStorage.getItem('DelegationKey'))
 			delegation_key = js_user_data.Key
 			console.log(delegation_key)
+			return true
 		else:
 			console.log("DelegationKey not found")
-	else:
-		print("NO HTML5 AND/OR JS")
-		print(delegation_key)
+	return false
+
+func _ready():
+	get_delegation_key()
 
 func get_level_info(level_code : String):
 	var req = RumpusURL.url_tower_levels.new()

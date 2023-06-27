@@ -9,6 +9,7 @@ onready var Connections := $Connections
 onready var RumpusReq := $RumpusRequests
 onready var StartMenu := $UI/BaseUI
 onready var LevelInfo := $UI/LevelInfo
+onready var CampaignStats := $UI/Stats
 
 signal update_ui(level)
 
@@ -20,10 +21,11 @@ func _ready():
 		LevelOrbs.load_user_campaign_from_json(url_cc)
 		StartMenu.show_return()
 		StartUI.show()
-		StartUIText.text = "Campaign: " + url_cc.campaignName + " by " + url_cc.creatorName
+		StartUIText.text = url_cc.campaignName + " by " + url_cc.creatorName
 	else:
 		StartMenu.load_saved_campaigns(LevelOrbs.get_all_saved_campaigns())
 		StartMenu.show()
+	$UI/BaseUI.delegation_key_present = RumpusReq.delegation_key == "NOKEY"
 
 # start button builds all paths
 func _on_StartButton_pressed():
@@ -37,94 +39,57 @@ func _on_StartButton_pressed():
 	SpaceShip.current_orb = startPos
 	SpaceShip.position = startPos.position
 	SpaceShip.calculate_possible_movement()
-	for level in LevelOrbs.get_all_level_orbs():
-		level.check_unlock()
-		if level.is_first_level():
-			emit_signal("update_ui", level)
-	
-	if startPos != null:
-		SpaceShip.position = startPos.position
+	emit_signal("update_ui", startPos)
+	$UI/Stats.update_stats(LevelOrbs.update_statistics())
 	StartUI.hide()
+
 
 ## Completion Checkmarks
 
-func _on_CompletedCheck_toggled(button_pressed):
-	# de-completing is buggy and thus not allowed
+func updateLevelProperty(property_name: String, button_pressed: bool, butt : CheckBox):
 	if !button_pressed:
 		return
-	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/CompletedCheck.disabled = true
+	
+	butt.disabled = true
 	var curr_lvl = SpaceShip.current_orb
 	if curr_lvl != null:
-		curr_lvl.level_completed = button_pressed
+		curr_lvl[property_name] = button_pressed
 		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
+		CampaignStats.update_stats(LevelOrbs.update_statistics())
 		SpaceShip.calculate_possible_movement()
 		Connections.refresh_all_paths()
+		LevelOrbs.set_current_saved(false)
+
+
+func _on_CompletedCheck_toggled(button_pressed):
+	updateLevelProperty("level_completed", button_pressed, $UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/CompletedCheck)
 
 
 func _on_AllJems_toggled(button_pressed):
-	if !button_pressed:
-		return
-	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllJems.disabled = true
-	var curr_lvl = SpaceShip.current_orb
-	if curr_lvl != null:
-		curr_lvl.level_all_jems = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
-		SpaceShip.calculate_possible_movement()
-		Connections.refresh_all_paths()
+	updateLevelProperty("level_all_jems", button_pressed, $UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllJems)
 
 
 func _on_AllBugs_toggled(button_pressed):
-	if !button_pressed:
-		return
-	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllBugs.disabled = true
-	var curr_lvl = SpaceShip.current_orb
-	if curr_lvl != null:
-		curr_lvl.level_all_bug_pieces = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
-		SpaceShip.calculate_possible_movement()
-		Connections.refresh_all_paths()
+	updateLevelProperty("level_all_bug_pieces", button_pressed, $UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/AllBugs)
 
 
-func _on_Benchmark_toggled(button_pressed): #ToDo: how are benchmarks handled?
-	if !button_pressed:
-		return
-	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/Benchmark.disabled = true
-	var curr_lvl = SpaceShip.current_orb
-	if curr_lvl != null:
-		curr_lvl.level_otd_met = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
-		SpaceShip.calculate_possible_movement()
-		Connections.refresh_all_paths()
+func _on_Benchmark_toggled(button_pressed):
+	updateLevelProperty("level_otd_met", button_pressed, $UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/Benchmark)
 
 
 func _on_FoundGR17_toggled(button_pressed):
-	if !button_pressed:
-		return
-	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/FoundGR17.disabled = true
-	var curr_lvl = SpaceShip.current_orb
-	if curr_lvl != null:
-		curr_lvl.level_found_gr17 = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
-		SpaceShip.calculate_possible_movement()
-		Connections.refresh_all_paths()
+	updateLevelProperty("level_found_gr17", button_pressed, $UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/FoundGR17)
+
 
 func _on_score_bench_toggled(button_pressed):
-	if !button_pressed:
-		return
-	$UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/score_bench.disabled = true
-	var curr_lvl = SpaceShip.current_orb
-	if curr_lvl != null:
-		curr_lvl.level_score_bench_met = button_pressed
-		LevelOrbs.update_unlocks_after_level(curr_lvl.levelID)
-		SpaceShip.calculate_possible_movement()
-		Connections.refresh_all_paths()
+	updateLevelProperty("level_score_bench_met", button_pressed, $UI/LevelInfo/HBoxContainer/VBoxContainer/Checks/score_bench)
 
 ## When a level is selected in the start menu
 
 func _on_BaseUI_load_campaign_from_start_menu(campaign):
 	LevelOrbs.load_user_campaign_from_json(campaign)
 	StartUI.show()
-	StartUIText.text = "Campaign: " + campaign.campaignName + " by " + campaign.creatorName
+	StartUIText.text = campaign.campaignName + " by " + campaign.creatorName
 	StartMenu.hide()
 
 func _on_Return_pressed():

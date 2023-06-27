@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://campaign_BG.png" type="Texture" id=1]
 [ext_resource path="res://LevelOrb.tscn" type="PackedScene" id=2]
@@ -33,6 +33,14 @@
 [ext_resource path="res://UI/bugs_no.png" type="Texture" id=31]
 [ext_resource path="res://UI/otd_yes.png" type="Texture" id=32]
 [ext_resource path="res://UI/gr17_no.png" type="Texture" id=33]
+[ext_resource path="res://CampaignStats.gd" type="Script" id=34]
+[ext_resource path="res://MediumYanoneFont.tres" type="Theme" id=35]
+[ext_resource path="res://UI/bug_mini.png" type="Texture" id=36]
+[ext_resource path="res://UI/complete_mini.png" type="Texture" id=37]
+[ext_resource path="res://UI/jem_mini.png" type="Texture" id=38]
+[ext_resource path="res://UI/gr17_mini.png" type="Texture" id=39]
+[ext_resource path="res://UI/score_mini.png" type="Texture" id=40]
+[ext_resource path="res://UI/otd_mini.png" type="Texture" id=41]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -134,6 +142,120 @@ levelID = "hmt6wzj"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Stats" type="VBoxContainer" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -169.0
+margin_bottom = 528.0
+theme = ExtResource( 35 )
+script = ExtResource( 34 )
+
+[node name="Completed" type="HBoxContainer" parent="UI/Stats"]
+margin_right = 169.0
+margin_bottom = 72.0
+
+[node name="Sprite2" type="TextureRect" parent="UI/Stats/Completed"]
+margin_top = 6.0
+margin_right = 50.0
+margin_bottom = 66.0
+size_flags_vertical = 4
+texture = ExtResource( 37 )
+
+[node name="Label" type="Label" parent="UI/Stats/Completed"]
+margin_left = 54.0
+margin_right = 54.0
+margin_bottom = 72.0
+
+[node name="Jems" type="HBoxContainer" parent="UI/Stats"]
+margin_top = 76.0
+margin_right = 169.0
+margin_bottom = 148.0
+
+[node name="Sprite3" type="TextureRect" parent="UI/Stats/Jems"]
+margin_top = 6.0
+margin_right = 50.0
+margin_bottom = 66.0
+size_flags_vertical = 4
+texture = ExtResource( 38 )
+
+[node name="Label" type="Label" parent="UI/Stats/Jems"]
+margin_left = 54.0
+margin_right = 54.0
+margin_bottom = 72.0
+
+[node name="Bugs" type="HBoxContainer" parent="UI/Stats"]
+margin_top = 152.0
+margin_right = 169.0
+margin_bottom = 224.0
+
+[node name="Sprite" type="TextureRect" parent="UI/Stats/Bugs"]
+margin_top = 6.0
+margin_right = 50.0
+margin_bottom = 66.0
+size_flags_vertical = 4
+texture = ExtResource( 36 )
+
+[node name="Label" type="Label" parent="UI/Stats/Bugs"]
+margin_left = 54.0
+margin_right = 54.0
+margin_bottom = 72.0
+
+[node name="GR17" type="HBoxContainer" parent="UI/Stats"]
+margin_top = 228.0
+margin_right = 169.0
+margin_bottom = 300.0
+
+[node name="Sprite4" type="TextureRect" parent="UI/Stats/GR17"]
+margin_top = 6.0
+margin_right = 50.0
+margin_bottom = 66.0
+size_flags_vertical = 4
+texture = ExtResource( 39 )
+
+[node name="Label" type="Label" parent="UI/Stats/GR17"]
+margin_left = 54.0
+margin_right = 54.0
+margin_bottom = 72.0
+
+[node name="OTDs" type="HBoxContainer" parent="UI/Stats"]
+margin_top = 304.0
+margin_right = 169.0
+margin_bottom = 376.0
+
+[node name="Sprite5" type="TextureRect" parent="UI/Stats/OTDs"]
+margin_top = 6.0
+margin_right = 50.0
+margin_bottom = 66.0
+size_flags_vertical = 4
+texture = ExtResource( 41 )
+
+[node name="Label" type="Label" parent="UI/Stats/OTDs"]
+margin_left = 54.0
+margin_right = 54.0
+margin_bottom = 72.0
+
+[node name="Scores" type="HBoxContainer" parent="UI/Stats"]
+margin_top = 380.0
+margin_right = 169.0
+margin_bottom = 452.0
+
+[node name="Sprite6" type="TextureRect" parent="UI/Stats/Scores"]
+margin_top = 6.0
+margin_right = 50.0
+margin_bottom = 66.0
+size_flags_vertical = 4
+texture = ExtResource( 40 )
+
+[node name="Label" type="Label" parent="UI/Stats/Scores"]
+margin_left = 54.0
+margin_right = 54.0
+margin_bottom = 72.0
+
+[node name="Total" type="Label" parent="UI/Stats"]
+margin_top = 456.0
+margin_right = 169.0
+margin_bottom = 528.0
+
 [node name="CameraZoom" type="HBoxContainer" parent="UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -165,12 +287,13 @@ custom_styles/panel = SubResource( 4 )
 script = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/LevelInfo"]
-margin_right = 920.0
+margin_right = 800.0
 margin_bottom = 205.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/LevelInfo/HBoxContainer"]
 margin_right = 626.0
 margin_bottom = 205.0
+size_flags_horizontal = 3
 
 [node name="TitleBookmark" type="HBoxContainer" parent="UI/LevelInfo/HBoxContainer/VBoxContainer"]
 margin_right = 626.0
@@ -194,6 +317,7 @@ text = " (PLCHLD)"
 margin_left = 436.0
 margin_right = 527.0
 margin_bottom = 93.0
+size_flags_vertical = 4
 toggle_mode = true
 texture_normal = ExtResource( 23 )
 texture_pressed = ExtResource( 22 )
@@ -202,6 +326,7 @@ texture_pressed = ExtResource( 22 )
 margin_left = 531.0
 margin_right = 622.0
 margin_bottom = 93.0
+size_flags_vertical = 4
 toggle_mode = true
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 9 )
@@ -277,15 +402,15 @@ custom_icons/unchecked = ExtResource( 24 )
 
 [node name="Control" type="Control" parent="UI/LevelInfo/HBoxContainer"]
 margin_left = 630.0
-margin_right = 630.0
+margin_right = 631.0
 margin_bottom = 205.0
 size_flags_horizontal = 3
 
 [node name="SaveButton" type="Button" parent="UI/LevelInfo/HBoxContainer"]
-margin_left = 634.0
-margin_right = 920.0
+margin_left = 635.0
+margin_right = 800.0
 margin_bottom = 205.0
-text = "SAVE PROGRESS"
+text = "SAVE"
 icon = ExtResource( 17 )
 
 [node name="Return" type="TextureButton" parent="UI"]
@@ -305,25 +430,35 @@ anchor_bottom = 1.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer"]
-margin_right = 1366.0
+margin_right = 800.0
 margin_bottom = 1080.0
 
-[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer"]
-margin_right = 1366.0
+[node name="CampaignHeader" type="Label" parent="UI/PanelContainer/VBoxContainer"]
+margin_right = 800.0
 margin_bottom = 120.0
 theme = ExtResource( 7 )
-text = "Campaign: Test by Radio inactive"
+text = "--Campaign--"
+align = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer"]
+margin_top = 124.0
+margin_right = 800.0
+margin_bottom = 244.0
+theme = ExtResource( 7 )
+text = "Test by Radio inactive"
+autowrap = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer/VBoxContainer"]
-margin_top = 124.0
-margin_right = 1366.0
-margin_bottom = 324.0
+margin_top = 248.0
+margin_right = 800.0
+margin_bottom = 448.0
 custom_constants/margin_top = 200
 
 [node name="StartButton" type="Button" parent="UI/PanelContainer/VBoxContainer"]
-margin_top = 328.0
-margin_right = 1366.0
-margin_bottom = 454.0
+margin_top = 452.0
+margin_right = 800.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
 theme = ExtResource( 7 )
 text = "Start Campaign"
 

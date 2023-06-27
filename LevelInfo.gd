@@ -15,7 +15,7 @@ onready var return_button := $"../Return"
 onready var level_code_label := $HBoxContainer/VBoxContainer/TitleBookmark/LevelCode
 
 onready var LevelOrbs := $"../../LevelOrbs"
-
+onready var RumpusReq := $"../../RumpusRequests"
 onready var SpaceShip := $"../../SpaceShip"
 
 const LevelOrb := preload("LevelOrb.gd")
@@ -30,8 +30,18 @@ func time_format(time):
 	str_out += "%02d"%seconds
 	return str_out
 
-func update_info_from_level(level : LevelOrb):
+func update_info_from_level(level: LevelOrb):
 	self.show()
+	if RumpusReq.delegation_key != "NOKEY":
+		bookmark_button.show()
+	else:
+		var delegation_key_set_success : bool = RumpusReq.get_delegation_key()
+		if delegation_key_set_success:
+			$"../BaseUI".delegation_key_present = true
+			bookmark_button.show()
+		else:
+			$"../BaseUI".delegation_key_present = false
+			bookmark_button.hide()
 	return_button.show()
 	if level != null:
 		if level.t == level.t_types.PATH_SHAPE_ASSIST:
@@ -50,38 +60,38 @@ func update_info_from_level(level : LevelOrb):
 		title.text = level.n
 		level_code_label.text = " (" + level.levelID + ")"
 		
-		bookmark_button.pressed = false
+		bookmark_button.set_pressed_no_signal(false)
 		bookmark_status.text = ""
 		
 		completed.show()
-		completed.pressed = level.level_completed
+		completed.set_pressed_no_signal(level.level_completed)
 		completed.disabled = level.level_completed
 		
 		all_jems.show()
-		all_jems.pressed = level.level_all_jems
+		all_jems.set_pressed_no_signal(level.level_all_jems)
 		all_jems.disabled = level.level_all_jems
 		
 		found_gr17.visible = level.ch == MapEntityGeneric.gr17_present.GR17_PRESENT
-		found_gr17.pressed = level.level_found_gr17
+		found_gr17.set_pressed_no_signal(level.level_found_gr17)
 		found_gr17.disabled = level.level_found_gr17
 		
 		all_bugs.visible = level.gr18 == MapEntityGeneric.bug_pieces_present.BUG_PIECES_PRESENT
-		all_bugs.pressed = level.level_all_bug_pieces
+		all_bugs.set_pressed_no_signal(level.level_all_bug_pieces)
 		all_bugs.disabled = level.level_all_bug_pieces
 		
 		bench.visible = level.b_time != 0
-		bench.pressed = level.level_otd_met
+		bench.set_pressed_no_signal(level.level_otd_met)
 		bench.disabled = level.level_otd_met
-		#todo: time formatting
+		# todo: time formatting
 		bench.text = time_format(level.b_time)
 		
 		score.visible = level.level_score_bench != 0
-		score.pressed = level.level_score_bench_met
+		score.set_pressed_no_signal(level.level_score_bench_met)
 		score.disabled = level.level_score_bench_met
-		#todo: formatting
+		# todo: formatting
 		score.text = "Score (" + String(level.level_score_bench) + ")"
 		
-		clipboard_button.pressed = false
+		clipboard_button.set_pressed_no_signal(false)
 	else:
 		print("no level in update_info_from_level")
 
