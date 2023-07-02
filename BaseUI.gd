@@ -302,7 +302,7 @@ const lhcc : Dictionary = {
 			"sc": 1
 		}
 	],
-	"version": 10,
+	"version": 11,
 	"mapNodes": [
 		{
 			"t": 0,
@@ -1264,7 +1264,7 @@ const lhcc : Dictionary = {
 		},
 		{
 			"t": 0,
-			"levelID": "8qz1087",
+			"levelID": "8qzl087",
 			"scpost": 0,
 			"pre_gr18": 0,
 			"pre_all": 0,
