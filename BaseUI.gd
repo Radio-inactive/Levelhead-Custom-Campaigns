@@ -14,6 +14,9 @@ var fileInput
 
 var delegation_key_present : bool setget set_delegation_key_warnig
 
+var js_document := JavaScript.get_interface("document")
+var js_url := JavaScript.get_interface("URL")
+
 func set_delegation_key_warnig(vis : bool):
 	$VBoxContainer/HBoxContainer/Logo/PanelContainer.visible = vis
 	delegation_key_present = vis
@@ -87,11 +90,29 @@ func file_load_succ(event):
 	if campaign_clip.error == OK:
 		campaign_clip = campaign_clip.result
 		if campaign_clip.has("campaignName") and campaign_clip.has("creatorCode"):
+			print(campaign_clip)
 			emit_signal("load_campaign_from_start_menu", campaign_clip)
 			FileLoad.hide()
 	else:
 		FileLoadMessage.text = "LOAD FAILED"
 		FileLoadMessage.show()
+
+# download file
+
+func get_lhcc_id() -> String:
+	return "LHCC_" + lhcc.campaignName + "_" + lhcc.creatorCode
+
+func download_lhcc_progress():
+	var camp := Util.get_file(get_lhcc_id(), "SavedCampaigns/Saved/")
+	if !camp:
+		return
+	print(camp)
+	var blob = JavaScript.create_object("Blob", JavaScript.create_object("Array", camp), { "type": "application/json" })
+	var a_elem = js_document.createElement("a")
+	a_elem.href = js_url.createObjectURL(blob);
+	a_elem.download = get_lhcc_id() + ".json";
+	
+	a_elem.click()
 
 # FILE LOADING
 
@@ -133,10 +154,11 @@ func _on_FromText_pressed():
 		FileLoadMessage.show()
 
 
-
 func _on_FromFile_pressed():
 	fileInput.click()
 
+func _on_load_pressed():
+	fileInput.click()
 
 func _on_LoadLHCC_pressed():
 	emit_signal("load_campaign_from_start_menu", lhcc)
@@ -144,7 +166,7 @@ func _on_LoadLHCC_pressed():
 
 const lhcc : Dictionary = {
 	"is_lhcc":true,
-   "landmarks": [
+	"landmarks": [
 		{
 			"x": 1754,
 			"y": -850,
@@ -1560,3 +1582,7 @@ const lhcc : Dictionary = {
 
 func _on_LinkButton_pressed():
 	OS.shell_open('https://level-kit.netlify.app/setting/')
+
+
+func _on_Button_pressed():
+	download_lhcc_progress()

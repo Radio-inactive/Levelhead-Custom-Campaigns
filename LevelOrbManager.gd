@@ -119,7 +119,9 @@ func save_user_campaign(type : String = "UC_"):
 	dict_out.mapNodes = get_levels_as_dict_arr()
 	dict_out.landmarks = LandmarkManager.get_landmarks_as_dict_array()
 	dict_out.shipStartPosition = Ship.current_orb.levelID if Ship.current_orb != null else ""
-	if is_lhcc: type = "LHCC_"
+	if is_lhcc:
+		type = "LHCC_"
+		dict_out.is_lhcc = true
 	
 	Util.set_file(get_campaign_id(type), JSON.print(dict_out), "SavedCampaigns/Saved/")
 	
@@ -145,6 +147,8 @@ func load_user_campaign_from_json(json, type : String = "UC_"):
 	creatorName = json.creatorName if "creatorName" in json else "ANONYMOUS"
 	creatorCode = json.creatorCode if "creatorCode" in json else "NO CREATOR CODE"
 	is_lhcc = "is_lhcc" in json
+	if campaignName == "Community Campaign" and creatorName == "Maoy" and creatorCode == "mlf95t":
+		is_lhcc = true #work around to not break downloading campaign process from old save. I initially forgot to save "is_lhcc" lol
 	if is_lhcc: type = "LHCC_"
 	
 	var prev_save = Util.get_file(get_campaign_id(type), "SavedCampaigns/Saved/")
