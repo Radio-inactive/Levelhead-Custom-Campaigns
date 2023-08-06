@@ -86,7 +86,12 @@ func _on_score_bench_toggled(button_pressed):
 
 ## When a level is selected in the start menu
 
-func _on_BaseUI_load_campaign_from_start_menu(campaign):
+func _on_BaseUI_load_campaign_from_start_menu(campaign, override_progress = false):
+	if override_progress:
+		var is_lhcc = ("is_lhcc" in campaign) or (campaign.campaignName == "Community Campaign" and campaign.creatorName == "Maoy" and campaign.creatorCode == "mlf95t")
+		var type = "LHCC_" if is_lhcc else "UC_"
+		Util.set_file(type + campaign.campaignName + "_" + campaign.creatorCode, JSON.print(campaign), "SavedCampaigns/Saved/")
+		print("overriding...")
 	LevelOrbs.load_user_campaign_from_json(campaign)
 	StartUI.show()
 	StartUIText.text = campaign.campaignName + " by " + campaign.creatorName

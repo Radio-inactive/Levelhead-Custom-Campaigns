@@ -21,7 +21,7 @@ func set_delegation_key_warnig(vis : bool):
 	$VBoxContainer/HBoxContainer/Logo/PanelContainer.visible = vis
 	delegation_key_present = vis
 
-signal load_campaign_from_start_menu(campaign)
+signal load_campaign_from_start_menu(campaign, override_existing)
 
 func load_saved_campaigns(campaigns : Array):
 	LoadCampaignButton.disabled = true
@@ -91,7 +91,7 @@ func file_load_succ(event):
 		campaign_clip = campaign_clip.result
 		if campaign_clip.has("campaignName") and campaign_clip.has("creatorCode"):
 			print(campaign_clip)
-			emit_signal("load_campaign_from_start_menu", campaign_clip)
+			emit_signal("load_campaign_from_start_menu", campaign_clip, true)
 			FileLoad.hide()
 	else:
 		FileLoadMessage.text = "LOAD FAILED"
